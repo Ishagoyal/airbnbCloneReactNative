@@ -1,16 +1,16 @@
 import React,{Component} from 'react';
 import {Router,Scene} from 'react-native-router-flux';
 
-import Page1 from './components/Page1';
-import Page2 from './components/Page2';
+import Home from './components/Home';
+import Property from './components/Property';
 
 export default class App extends Component{
 	render() {
 		return (
 			<Router>
 				<Scene key="root">
-					<Scene key="page1" component={Page1} title="Page1" initial={true} />
-					<Scene key="page2" component={Page2} title="Page2" />
+					<Scene key="home" component={Home} title="Home" initial={true} />
+					<Scene key="property" component={Property} title="Property" />
 				</Scene>	
 			</Router>
 		)
