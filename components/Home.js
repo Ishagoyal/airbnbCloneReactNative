@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { View, Text, FlatList, StyleSheet, Image } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import dataJson from './data.json';
+import propertyListData from './data.json';
 
-console.log(dataJson);
 
-function handleClick(item,e) {
+
+function onPressPropertyName(item,e) {
 	e.preventDefault();
 	Actions.property({text: item.name});
 	console.log(item.name, 'was clicked');
@@ -17,20 +17,24 @@ export default class Home extends Component{
 		return (
 			<View>
 				<FlatList
-					key={"renderList"}
-					data={dataJson}
-					renderItem={({item}) => 
-						<View>
-							<Text style={styles.item} onPress={handleClick.bind(this,item)}>{item.name} </Text>
-							<Text style={styles.item} > {item.price}</Text>
-							<Text style={styles.item} > {item.address} </Text>
-							<Image source={{uri:item.image}} style={{width: 32, height: 32}} />
-						</View>
-					}
+					key={"propertyList"}
+					data={propertyListData}
+					renderItem={({item}) => renderPropertyListRow(item)}
 				/>
 			</View>
 		);
 	}
+}
+
+function renderPropertyListRow(item){
+	return(
+		<View>
+			<Text style={styles.item} onPress={onPressPropertyName.bind(this,item)}>{item.name} </Text>
+			<Text style={styles.item} > {item.price} </Text>
+			<Text style={styles.item} > {item.address} </Text>
+			<Image source={{uri:item.image}} style={{width: 32, height: 32}} />
+		</View>
+	);	
 }
 
 
