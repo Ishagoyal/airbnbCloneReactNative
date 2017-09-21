@@ -17,9 +17,9 @@ export default class Home extends Component{
 		return (
 			<View>
 				<FlatList
-					key={"propertyList"}
 					data={propertyListData}
 					renderItem={({item}) => renderPropertyListRow(item)}
+					//keyExtractor={(item, index) => index}
 				/>
 			</View>
 		);
@@ -28,13 +28,13 @@ export default class Home extends Component{
 
 function renderPropertyListRow(item){
 	return(
-		<View>
-			<Text style={styles.item} onPress={onPressPropertyName.bind(this,item)}>{item.name} </Text>
-			<Text style={styles.item} > {item.price} </Text>
-			<Text style={styles.item} > {item.address} </Text>
-			<Image source={{uri:item.image}} style={{width: 32, height: 32}} />
+		<View >
+			<Text style={styles.item} key="a" onPress={onPressPropertyName.bind(this,item)}>{item.name} </Text>
+			<Text style={styles.item} key="b" > {item.price} </Text>
+			<Text style={styles.item} key="c" > {item.address} </Text>
+			<Image source={{uri:item.image}} key="d" style={{width: 32, height: 32}} />
 		</View>
-	);	
+	);	 
 }
 
 
