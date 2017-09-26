@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, FlatList, StyleSheet, Image } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import propertyListData from './data.json';
+import propertyListData from '../utils/data.json';
 
 export default class Home extends Component{
 	render() {
@@ -9,21 +9,25 @@ export default class Home extends Component{
 			<View>
 				<FlatList
 					data={propertyListData}
-					renderItem={(item) => this.renderPropertyListRow(item)}
+					renderItem={({item}) => this.renderPropertyListRow(item)}
 				/>
 			</View>
 		);
 	}
 
   onPressPropertyName(item){
-	Actions.property({text: item.name});
-	console.log(item.name, 'was clicked');	
-	}	
-
+		Actions.property({text: item.name});
+		console.log(item.name, 'was clicked');	
+	}		
 
   renderPropertyListRow(item){
 		return(
-			<Text style={styles.item} key="a" onPress={this.onPressPropertyName.bind(this,item)}>{item.name} </Text>
+			<View>
+				<Text style={styles.item} onPress={this.onPressPropertyName.bind(this,item)}>{item.name} </Text>
+				<Text style={styles.item} >{item.price} </Text>
+				<Text style={styles.item} >{item.address} </Text>
+				<Image source = {{uri:item.image}} style={{width: 32, height: 32}} />
+			</View>	
 		);	 
 	}
 }
