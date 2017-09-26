@@ -15,12 +15,12 @@ export default class Home extends Component{
 		);
 	}
 
-  onPressPropertyName(item){
+	onPressPropertyName(item){
 		Actions.property({text: item.name});
 		console.log(item.name, 'was clicked');	
 	}		
 
-  renderPropertyListRow(item){
+	renderPropertyListRow(item){
 		return(
 			<View>
 				<Text style={styles.item} onPress={this.onPressPropertyName.bind(this,item)}>{item.name} </Text>
@@ -34,13 +34,13 @@ export default class Home extends Component{
 
 
 const styles = StyleSheet.create({
-  container: {
-   flex: 1,
-   paddingTop: 22
-  },
-  item: {
-    padding: 5,
-    fontSize: 12,
-    height: 44,
-  },
+	container: {
+	 flex: 1,
+	 paddingTop: 22
+	},
+	item: {
+		padding: 5,
+		fontSize: 12,
+		height: 44,
+	},
 })
