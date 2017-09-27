@@ -17,8 +17,8 @@ export default class Home extends Component{
 
 	onPressPropertyName(item){
 		Actions.property({text: item.name});
-		console.log(item.name, 'was clicked');	
-	}		
+		console.log(item.name, 'was clicked');  
+	}   
 
 	renderPropertyListRow(item){
 		return(
@@ -27,8 +27,8 @@ export default class Home extends Component{
 				<Text style={styles.item} >{item.price} </Text>
 				<Text style={styles.item} >{item.address} </Text>
 				<Image source = {{uri:item.image}} style={{width: 32, height: 32}} />
-			</View>	
-		);	 
+			</View> 
+		);   
 	}
 }
 
