@@ -4,11 +4,18 @@ import { View, Text } from 'react-native';
 export default class Property extends Component{
 	constructor(props){
 		super(props);
+    this.displayText = '';
+    
 	}
+  
+  componentDidMount(){
+    displayText = this.props.text;
+  } 
+
 	render() {
 		return(
 			<View style={{margin: 128}}>
-				<Text>{this.props.text}</Text>
+				<Text>{displayText}</Text>
 			</View>
 		)
 	}
