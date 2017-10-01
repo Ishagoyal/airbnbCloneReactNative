@@ -4,18 +4,21 @@ import { View, Text } from 'react-native';
 export default class Property extends Component{
 	constructor(props){
 		super(props);
-    this.displayText = '';
-    
+    this.setState({
+      displayText:''
+    }); 
 	}
   
   componentDidMount(){
-    displayText = this.props.text;
+    this.setState({
+      displayText: 'xyz'
+    });
   } 
 
 	render() {
 		return(
 			<View style={{margin: 128}}>
-				<Text>{displayText}</Text>
+				<Text>{this.state.displayText}</Text>
 			</View>
 		)
 	}

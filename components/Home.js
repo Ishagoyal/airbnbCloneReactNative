@@ -16,7 +16,7 @@ export default class Home extends Component{
 	}
 
 	onPressPropertyName(item){
-		Actions.property({text: item.id});
+		Actions.property({text: item.name});
 		console.log(item.name, 'was clicked');  
 	}   
 
