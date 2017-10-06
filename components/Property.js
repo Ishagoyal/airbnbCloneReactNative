@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native'; 
+import propertyDetailsData from '../utils/propertyDetailsData.json';
+
+console.log(propertyDetailsData.name);
 
 export default class Property extends Component{
 	constructor(props){
 		super(props);
-    this.setState({
-      displayText:''
-    }); 
+    this.state = {
+      displayText: ''
+    }; 
 	}
   
   componentDidMount(){
     this.setState({
-      displayText: 'xyz'
+      displayText: this.props.text
     });
   } 
 
