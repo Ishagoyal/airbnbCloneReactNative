@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   },
   item: {
     padding: 5,
-    fontSize: 12,
+    fontSize: 14,
     height: 44,
   },
   heading: {
