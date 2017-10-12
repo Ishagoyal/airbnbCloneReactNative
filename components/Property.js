@@ -31,8 +31,16 @@ export default class Property extends Component{
         <Text style={styles.item} >{this.state.displayName} </Text>
         <Text style={styles.item} >{this.state.displayPrice} </Text>
         <Text style={styles.item} >{this.state.displayAddress} </Text>
+        <Button
+          onPress={this.selectDates}
+          title="Check Availability" 
+        />
       </View> 
     );
+  }
+
+  selectDates(){
+
   }
 
 	render() {
