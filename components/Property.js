@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native'; 
+import { View, Text, StyleSheet, Image, Button } from 'react-native'; 
 import propertyDetailsData from '../utils/propertyDetailsData.json';
+import Calendar from 'react-native-calendar-select';
 
 export default class Property extends Component{
 	constructor(props){
@@ -22,18 +23,26 @@ export default class Property extends Component{
     });
   } 
 
-	render() {
-		return(
-			<View style={styles.container} >
+  renderPropertyDetails(){
+    return(
+      <View style={styles.container} >
         <Text style={styles.heading} > Property Details </Text>
+        <Image source = {{uri:this.state.displayImage}} style={{width: 300, height: 200, marginLeft: 5,}} />
         <Text style={styles.item} >{this.state.displayName} </Text>
         <Text style={styles.item} >{this.state.displayPrice} </Text>
         <Text style={styles.item} >{this.state.displayAddress} </Text>
-        <Image source = {{uri:this.state.displayImage}} style={{width: 300, height: 200, marginLeft: 5,}} />
       </View> 
-		)
-	}
-}
+    );
+  }
+
+	render() {
+    return(
+      <View>
+        {this.renderPropertyDetails()}
+      </View>
+    )
+  }
+}  
 
 const styles = StyleSheet.create({
   container: {
