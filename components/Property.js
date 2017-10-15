@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, Button } from 'react-native'; 
+import { View, Text, StyleSheet, Image, Button, DatePickerAndroid } from 'react-native'; 
 import propertyDetailsData from '../utils/propertyDetailsData.json';
-import Calendar from 'react-native-calendar-select';
+//import Calendar from 'react-native-calendar-select';
 
 export default class Property extends Component{
 	constructor(props){
@@ -11,11 +11,11 @@ export default class Property extends Component{
       displayPrice: '',
       displayAddress: '',
       displayImage: '',
-      startDate: new Date(2017, 9, 13),
-      endDate: new Date(2017, 11, 31)
+      //startDate: new Date(2017, 9, 13),
+      //endDate: new Date(2017, 11, 31)
     }; 
-    this.confirmDate = this.confirmDate.bind(this);
-    this.openCalendar = this.openCalendar.bind(this);
+    //this.confirmDate = this.confirmDate.bind(this);
+    //this.openCalendar = this.openCalendar.bind(this);
 	}
   
   componentDidMount(){
@@ -38,7 +38,7 @@ export default class Property extends Component{
       </View> 
     );
   }
-
+/*
   confirmDate({startDate, endDate}){
     this.setState({
       startDate,
@@ -48,10 +48,10 @@ export default class Property extends Component{
 
   openCalendar(){
     this.calendar && this.calendar.open();
-  }
+  }*/
 
 
-  renderCalendar(){
+  /*renderCalendar(){
     let calendarStructure = {
       'w': ['', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'],
       'weekday': ['', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
@@ -87,6 +87,32 @@ export default class Property extends Component{
         />
       </View>
     )
+  }*/
+
+  async openCalendar(){
+    try {
+      const {action, year, month, day} = await DatePickerAndroid.open({
+        // Use `new Date()` for current date.
+        // May 25 2020. Month 0 is January.
+        date: new Date(2017, 9, 15)
+      });
+      if (action !== DatePickerAndroid.dismissedAction) {
+        // Selected year, month (0-11), day
+      }
+    } catch ({code, message}) {
+      console.warn('Cannot open date picker', message);
+    }
+  }
+
+  renderCalendar(){
+    return(
+      <View>
+        <Button
+          title="Check Availability" 
+          onPress={this.openCalendar}
+        />
+      </View>
+    );    
   }
 
 	render() {
