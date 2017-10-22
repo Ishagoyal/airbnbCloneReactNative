@@ -1,8 +1,19 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, Button, DatePickerAndroid } from 'react-native'; 
+import { 
+  View, 
+  Text, 
+  StyleSheet, 
+  Image, 
+  Button, 
+  ScrollView, 
+  DatePickerAndroid,
+  TouchableOpacity,
+  TouchableHighlight 
+} from 'react-native'; 
 import propertyDetailsData from '../utils/propertyDetailsData.json';
-//import Calendar from 'react-native-calendar-select';
+import { Actions } from 'react-native-router-flux';
 
+var isStartDate = true;
 export default class Property extends Component{
 	constructor(props){
 		super(props);
@@ -11,11 +22,14 @@ export default class Property extends Component{
       displayPrice: '',
       displayAddress: '',
       displayImage: '',
-      //startDate: new Date(2017, 9, 13),
-      //endDate: new Date(2017, 11, 31)
+      startDate:'',
+      endDate:'',
+      isStartDateConfirmed:false,
+      isEndDateConfirmed:false,
     }; 
-    //this.confirmDate = this.confirmDate.bind(this);
-    //this.openCalendar = this.openCalendar.bind(this);
+    this.openCalendarForCheckIn = this.openCalendarForCheckIn.bind(this);
+    this.openCalendarForCheckOut = this.openCalendarForCheckOut.bind(this);
+    this.displayConfirmButton = this.displayConfirmButton.bind(this);
 	}
   
   componentDidMount(){
@@ -27,107 +41,120 @@ export default class Property extends Component{
     });
   } 
 
+  render() {
+    return(
+      <View style = {styles.container}>
+        {this.renderPropertyDetails()}
+        <View style={{flexDirection:'row'}}>
+          {this.displayCheckInDate()}
+          {this.displayCheckOutDate()} 
+        </View> 
+        {this.displayConfirmButton()}  
+      </View>  
+    );       
+  }
+
   renderPropertyDetails(){
     return(
-      <View style={styles.container} >
-        <Text style={styles.heading} > Property Details </Text>
-        <Image source = {{uri:this.state.displayImage}} style={{width: 300, height: 200, marginLeft: 5,}} />
-        <Text style={styles.item} >{this.state.displayName} </Text>
-        <Text style={styles.item} >{this.state.displayPrice} </Text>
-        <Text style={styles.item} >{this.state.displayAddress} </Text>
-      </View> 
+      <View>
+        <ScrollView>
+          <Text style={styles.heading} >{'Property Details'}</Text>
+          <Image source = {{uri:this.state.displayImage}} style={{ height: 200, marginLeft: 5,}} />
+          <Text style={styles.item} >{this.state.displayName} </Text>
+          <Text style={styles.item} >{this.state.displayPrice} </Text>
+          <Text style={styles.item} >{this.state.displayAddress} </Text>
+        </ScrollView>
+        <View style={{flexDirection:'row', flexWrap:'wrap'}}>
+          <TouchableOpacity style={styles.button} onPress={this.openCalendarForCheckIn}>
+            <Text>CheckIn</Text> 
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={this.openCalendarForCheckOut}>
+            <Text>CheckOut</Text> 
+          </TouchableOpacity>
+        </View> 
+      </View>  
     );
   }
-/*
-  confirmDate({startDate, endDate}){
-    this.setState({
-      startDate,
-      endDate
-    });
+
+  displayCheckInDate(){
+    if(this.state.isStartDateConfirmed){
+      return(
+        <View style={{marginLeft:50,marginRight:50,paddingTop:10}}>
+          <Text>{this.state.startDate}</Text>  
+        </View> 
+      )
+    }
   }
 
-  openCalendar(){
-    this.calendar && this.calendar.open();
-  }*/
+  displayCheckOutDate(){
+    if(this.state.isEndDateConfirmed){
+      return(
+        <View style={{marginLeft:60,marginRight:50,paddingTop:10}}>
+          <Text>{this.state.endDate}</Text>  
+        </View> 
+      )
+    }
+  }
+
+  displayConfirmButton(){
+    if(this.state.isEndDateConfirmed && this.state.isEndDateConfirmed){
+      return(
+        <View style={{paddingTop:10}}>
+          <Button
+            title="Confirm"
+            onPress={()=>this.onPressConfirmButton(this.state.startDate,this.state.endDate)}
+          /> 
+        </View> 
+      )
+    }
+  }
 
 
-  /*renderCalendar(){
-    let calendarStructure = {
-      'w': ['', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'],
-      'weekday': ['', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-      'text': {
-        'start': 'Check in',
-        'end':'Check out',
-        'date':'Date',
-        'save':'Confirm',
-        'clear':'Reset'
-      },
-      'date' : 'DD / MM'
-    };
-    let color = {
-      subColor: '#f0f0f0'
-    };
-    return(
-      <View>
-        <Button
-          title="Check Availability" 
-          onPress={this.openCalendar}
-        />
-        <Calendar
-          i18n="en"
-          ref={(calendar) => {this.calendar = calendar;}}
-          customI18n={calendarStructure}
-          color={color}
-          format="YYYYMMDD"
-          minDate="20171013"
-          maxDate="20180915"
-          startDate={this.state.startDate}
-          endDate={this.state.endDate}
-          onConfirm={this.confirmDate}   
-        />
-      </View>
-    )
-  }*/
+  onPressConfirmButton(startDateDisplay, endDateDisplay){
+    Actions.bookProperty({startDate: startDateDisplay,endDate:endDateDisplay}); 
+  }
 
-  async openCalendar(){
+  async openCalendarForCheckIn(){
     try {
       const {action, year, month, day} = await DatePickerAndroid.open({
-        // Use `new Date()` for current date.
-        // May 25 2020. Month 0 is January.
-        date: new Date(2017, 9, 15)
+      date: new Date(),
+      minDate:new Date()
+    });
+    if (action !== DatePickerAndroid.dismissedAction) {
+      // Selected year, month (0-11), day
+      this.setState({
+       startDate : day+"-"+(month+1)+"-"+year,
+       isStartDateConfirmed : true
       });
-      if (action !== DatePickerAndroid.dismissedAction) {
-        // Selected year, month (0-11), day
-      }
+    }
     } catch ({code, message}) {
       console.warn('Cannot open date picker', message);
     }
   }
 
-  renderCalendar(){
-    return(
-      <View>
-        <Button
-          title="Check Availability" 
-          onPress={this.openCalendar}
-        />
-      </View>
-    );    
-  }
-
-	render() {
-    return(
-      <View>
-        {this.renderPropertyDetails()}
-        {this.renderCalendar()}
-      </View>
-    )
+  async openCalendarForCheckOut(){
+    try {
+      const {action, year, month, day} = await DatePickerAndroid.open({
+      date: new Date(),
+      minDate:new Date()
+    });
+    if (action !== DatePickerAndroid.dismissedAction) {
+      // Selected year, month (0-11), day
+      this.setState({
+        endDate : day+"-"+(month+1)+"-"+year,
+        isEndDateConfirmed : true
+      });
+    }
+    } catch ({code, message}) {
+      console.warn('Cannot open date picker', message);
+    }
   }
 }  
 
 const styles = StyleSheet.create({
   container: {
-   paddingTop: 30
+    flex:1,
+    paddingTop: 30
   },
   item: {
     padding: 5,
@@ -135,8 +162,24 @@ const styles = StyleSheet.create({
     height: 44,
   },
   heading: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
   },
+  calendar: {
+    borderTopWidth: 1,
+    paddingTop: 5,
+    borderBottomWidth: 1,
+    borderColor: '#eee',
+    height: 350
+  },
+  button: {
+    backgroundColor: '#00bfff',
+    height: 30,
+    width:80,
+    marginTop: 10,
+    marginLeft:50,
+    marginRight:50,
+    alignItems:'center',
+  }
 })
