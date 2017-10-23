@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, FlatList, StyleSheet, Image } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import propertyListData from '../utils/data.json';
+
 export default class Home extends Component{
 	render() {
 		return (
