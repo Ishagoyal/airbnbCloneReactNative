@@ -25,7 +25,7 @@ export default class Home extends Component{
 				<Text style={styles.item} onPress={this.onPressPropertyName.bind(this,item)}>{item.name} </Text>
 				<Text style={styles.item} >{item.price} </Text>
 				<Text style={styles.item} >{item.address} </Text>
-				<Image source = {{uri:item.image}} style={{width: 32, height: 32}} />
+				<Image source = {{uri:item.images.image1}} style={{width: 32, height: 32}} />
 			</View> 
 		);   
 	}

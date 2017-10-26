@@ -12,6 +12,7 @@ import {
 } from 'react-native'; 
 import propertyDetailsData from '../utils/propertyDetailsData.json';
 import { Actions } from 'react-native-router-flux';
+import Swiper from 'react-native-swiper';
 
 var isStartDate = true;
 export default class Property extends Component{
@@ -21,7 +22,8 @@ export default class Property extends Component{
       displayName: '',
       displayPrice: '',
       displayAddress: '',
-      displayImage: '',
+      displayImage1: '',
+      displayImage2: '',
       startDate:'',
       endDate:'',
       isStartDateConfirmed:false,
@@ -37,7 +39,8 @@ export default class Property extends Component{
       displayName: propertyDetailsData[0].name,
       displayPrice: propertyDetailsData[0].price,
       displayAddress: propertyDetailsData[0].address,
-      displayImage: propertyDetailsData[0].image
+      displayImage1: propertyDetailsData[0].images.image1,
+      displayImage2:propertyDetailsData[0].images.image2
     });
   } 
 
@@ -54,17 +57,35 @@ export default class Property extends Component{
     );       
   }
 
+  renderImageSwiper(){
+    return(
+       <View>
+        <Swiper 
+          style={styles.wrapper} 
+          height={300}
+        >
+          <View style={styles.slide}>
+            <Image source = {{uri:this.state.displayImage1}} style={{ height: 250, marginLeft: 5,}} />
+          </View>
+          <View style={styles.slide}>
+            <Image source = {{uri:this.state.displayImage2}} style={{ height: 250, marginLeft: 5,}} />
+          </View>
+        </Swiper>
+      </View> 
+    )
+  }
+  
   renderPropertyDetails(){
     return(
-      <View>
-        <ScrollView>
+      <View style={{flex:1}}>
+        <ScrollView >
           <Text style={styles.heading} >{'Property Details'}</Text>
-          <Image source = {{uri:this.state.displayImage}} style={{ height: 200, marginLeft: 5,}} />
+          {this.renderImageSwiper()}
           <Text style={styles.item} >{this.state.displayName} </Text>
           <Text style={styles.item} >{this.state.displayPrice} </Text>
           <Text style={styles.item} >{this.state.displayAddress} </Text>
         </ScrollView>
-        <View style={{flexDirection:'row', flexWrap:'wrap'}}>
+        <View style={{flexDirection:'row', flexWrap:'wrap',paddingBottom:10}}>
           <TouchableOpacity style={styles.button} onPress={this.openCalendarForCheckIn}>
             <Text>CheckIn</Text> 
           </TouchableOpacity>
@@ -99,7 +120,7 @@ export default class Property extends Component{
   displayConfirmButton(){
     if(this.state.isEndDateConfirmed && this.state.isEndDateConfirmed){
       return(
-        <View style={{paddingTop:10}}>
+        <View style={{paddingTop:10, paddingBottom:10}}>
           <Button
             title="Confirm"
             onPress={()=>this.onPressConfirmButton(this.state.startDate,this.state.endDate)}
@@ -181,5 +202,10 @@ const styles = StyleSheet.create({
     marginLeft:50,
     marginRight:50,
     alignItems:'center',
-  }
+  },
+  slide:{
+
+  },
+  wrapper: {
+  },
 })
