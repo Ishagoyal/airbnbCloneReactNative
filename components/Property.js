@@ -22,8 +22,7 @@ export default class Property extends Component{
       displayName: '',
       displayPrice: '',
       displayAddress: '',
-      displayImage1: '',
-      displayImage2: '',
+      displayImages:[],
       startDate:'',
       endDate:'',
       isStartDateConfirmed:false,
@@ -39,8 +38,7 @@ export default class Property extends Component{
       displayName: propertyDetailsData[0].name,
       displayPrice: propertyDetailsData[0].price,
       displayAddress: propertyDetailsData[0].address,
-      displayImage1: propertyDetailsData[0].images.image1,
-      displayImage2:propertyDetailsData[0].images.image2
+      displayImages:propertyDetailsData[0].images
     });
   } 
 
@@ -64,12 +62,13 @@ export default class Property extends Component{
           style={styles.wrapper} 
           height={300}
         >
-          <View style={styles.slide}>
-            <Image source = {{uri:this.state.displayImage1}} style={{ height: 250, marginLeft: 5,}} />
-          </View>
-          <View style={styles.slide}>
-            <Image source = {{uri:this.state.displayImage2}} style={{ height: 250, marginLeft: 5,}} />
-          </View>
+          {this.state.displayImages.map((displayImage,key) => {
+            return (
+              <View key={key}>
+                <Image source = {{uri:displayImage.image}} style={{ height: 250, marginLeft: 5,}} />
+              </View>
+            )
+          })}
         </Swiper>
       </View> 
     )
@@ -202,10 +201,5 @@ const styles = StyleSheet.create({
     marginLeft:50,
     marginRight:50,
     alignItems:'center',
-  },
-  slide:{
-
-  },
-  wrapper: {
-  },
+  },  
 })

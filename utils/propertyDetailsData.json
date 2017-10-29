@@ -4,9 +4,13 @@
     "name": "Tahiti Village - Luxury Las Vegas Condo",
     "price" : "$110",
     "address": "LAS VEGAS, NV, United States",
-    "images" : {
-    	"image1": "https://a0.muscache.com/im/pictures/1463f221-1d43-49bc-a23a-8df3f24f56e4.jpg",
-      "image2":"https://a0.muscache.com/im/pictures/e919a9b2-3766-4eec-abc7-73e93865e94b.jpg"
-    }
+    "images" : [
+    	{"image":"https://a0.muscache.com/im/pictures/1463f221-1d43-49bc-a23a-8df3f24f56e4.jpg"},
+      {"image":"https://a0.muscache.com/im/pictures/e919a9b2-3766-4eec-abc7-73e93865e94b.jpg"},
+      {"image":"https://a0.muscache.com/im/pictures/33178833/7dbdda15_original.jpg"},
+      {"image":"https://a0.muscache.com/im/pictures/33178108/564b9ec6_original.jpg"},
+      {"image":"https://a0.muscache.com/im/pictures/33179136/4744e52c_original.jpg"},
+      {"image":"https://a0.muscache.com/im/pictures/8fb3746a-7256-46dd-94c9-97c96ac8a7a7.jpg"},
+    ]
   }
 ]  
