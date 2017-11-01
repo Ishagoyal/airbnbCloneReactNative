@@ -21,11 +21,11 @@ export default class Home extends Component{
 
 	renderPropertyListRow(item){
 		return(
-			<View>
-				<Text style={styles.item} onPress={this.onPressPropertyName.bind(this,item)}>{item.name} </Text>
+			<View style={styles.container}>
+        <Image source = {{uri:item.images.image1}} style={{width:400,height: 200,padding:5}} />
+				<Text style={styles.name} onPress={this.onPressPropertyName.bind(this,item)}>{item.name} </Text>
 				<Text style={styles.item} >{item.price} </Text>
 				<Text style={styles.item} >{item.address} </Text>
-				<Image source = {{uri:item.images.image1}} style={{width: 32, height: 32}} />
 			</View> 
 		);   
 	}
@@ -34,12 +34,22 @@ export default class Home extends Component{
 
 const styles = StyleSheet.create({
 	container: {
-	 flex: 1,
-	 paddingTop: 22
+    flexDirection:'row',
+    flexWrap:'wrap',
+    flex: 1,
+    paddingTop: 22
 	},
 	item: {
 		padding: 5,
 		fontSize: 12,
-		height: 44,
+		height: 30,
+    fontWeight:'bold',
 	},
+  name:{
+    fontSize:14,
+    fontWeight:'bold',
+    color:'#3A5FCD',
+    paddingTop:5,
+    paddingLeft:5
+  }
 })

@@ -9,6 +9,14 @@ import Profile from './components/Profile';
 import Trips from './components/Trips';
 import Saved from './components/Saved';
 import Inbox from './components/Inbox';
+import EditProfile from './components/EditProfile';
+import Notifications from './components/Notifications';
+import CreditsAndCoupons from './components/CreditsAndCoupons';
+import InviteFriends from './components/InviteFriends';
+import Payments from './components/Payments';
+import Settings from './components/Settings';
+import GetHelp from './components/GetHelp';
+import GiveFeedback from './components/GiveFeedback';
 
 export default class App extends Component{
 	render() {
@@ -18,6 +26,14 @@ export default class App extends Component{
 					<Scene key="home" component={Home} title="Home" initial={true} />
 					<Scene key="property" component={Property} title="Property" />
           <Scene key="bookProperty" component={BookProperty} title="BookProperty" />
+          <Scene key="editProfile" component={EditProfile} title="EditProfile"/>
+          <Scene key="notifications" component={Notifications} title="Notifications"/>
+          <Scene key="creditsAndCoupons" component={CreditsAndCoupons} title="CreditsAndCoupons"/>
+          <Scene key="inviteFriends" component={InviteFriends} title="InviteFriends"/>
+          <Scene key="payments" component={Payments} title="Payments"/>
+          <Scene key="settings" component={Settings} title="Settings"/>
+          <Scene key="getHelp" component={GetHelp} title="GetHelp"/>
+          <Scene key="giveFeedback" component={GiveFeedback} title="GiveFeedback"/>
           <Scene  
               key="tabbar"
               tabs
