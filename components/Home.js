@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList, StyleSheet, Image } from 'react-native';
+import { View, Text, FlatList, StyleSheet, Image,TouchableHighlight } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import propertyListData from '../utils/data.json';
 
 export default class Home extends Component{
 	render() {
 		return (
-			<View>
+			<View style={{flex:1}}>
+        {this.renderSearchBar()}
 				<FlatList
 					data={propertyListData}
 					renderItem={({item}) => this.renderPropertyListRow(item)}
@@ -16,7 +17,7 @@ export default class Home extends Component{
 	}
 
 	onPressPropertyName(item){
-		Actions.property({text: item.id});  
+		Actions.property({propertyId: item.id});  
 	}   
 
 	renderPropertyListRow(item){
@@ -29,6 +30,23 @@ export default class Home extends Component{
 			</View> 
 		);   
 	}
+
+  renderSearchBar(){
+    return(
+      <View>
+        <TouchableHighlight style={styles.search} onPress={this.onPressAnywhereButton.bind(this)}>
+          <View style={{flexDirection:'row', flexWrap:'wrap'}}>
+            <Image source={{uri: "http://www.pvhc.net/img2/lnuceeldknrdpozttbxm.png"}} style={{width:30,height:30}}/>
+            <Text style={styles.searchText}>{'Search City'}</Text>
+          </View>  
+        </TouchableHighlight>
+      </View>
+    )  
+  }
+
+  onPressAnywhereButton(){
+    Actions.searchCity();
+  }
 }
 
 
@@ -37,7 +55,7 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     flexWrap:'wrap',
     flex: 1,
-    paddingTop: 22
+    paddingTop: 10
 	},
 	item: {
 		padding: 5,
@@ -51,5 +69,20 @@ const styles = StyleSheet.create({
     color:'#3A5FCD',
     paddingTop:5,
     paddingLeft:5
+  },
+  search:{
+    padding:10,
+    borderWidth:1,
+    margin:5,
+    marginTop:10,
+    borderColor:'#20b2aa',
+    backgroundColor:'#20b2aa',
+    borderRadius:5
+  },
+  searchText:{
+    color:'white',
+    fontWeight:'bold',
+    marginLeft:20,
+    fontSize:16,
   }
 })

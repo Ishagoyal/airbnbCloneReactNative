@@ -14,7 +14,6 @@ import propertyDetailsData from '../utils/propertyDetailsData.json';
 import { Actions } from 'react-native-router-flux';
 import Swiper from 'react-native-swiper';
 
-var isStartDate = true;
 export default class Property extends Component{
 	constructor(props){
 		super(props);

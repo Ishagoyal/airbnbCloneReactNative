@@ -17,6 +17,7 @@ import Payments from './components/Payments';
 import Settings from './components/Settings';
 import GetHelp from './components/GetHelp';
 import GiveFeedback from './components/GiveFeedback';
+import SearchCity from './components/SearchCity';
 
 export default class App extends Component{
 	render() {
@@ -34,6 +35,7 @@ export default class App extends Component{
           <Scene key="settings" component={Settings} title="Settings"/>
           <Scene key="getHelp" component={GetHelp} title="GetHelp"/>
           <Scene key="giveFeedback" component={GiveFeedback} title="GiveFeedback"/>
+          <Scene key="searchCity" component={SearchCity} title="SearchCity"/>
           <Scene  
               key="tabbar"
               tabs
