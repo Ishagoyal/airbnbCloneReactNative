@@ -38,7 +38,7 @@ export default class SearchCity extends Component{
   }
 
   onPressSearchButton(cityName){
-    Actions.explore({searchedCityName:cityName});
+    Actions.explore({cityNameObtained:cityName});
   }
 }
 

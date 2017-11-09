@@ -4,14 +4,36 @@ import { Actions } from 'react-native-router-flux';
 import propertyListData from '../utils/data.json';
 
 export default class Home extends Component{
+
+  constructor(props){
+    super(props);
+    this.state = {
+      propertyCityName:'',
+      isSearchingCity:false,
+    }
+  }
+
+  componentDidMount(){
+    this.setState({
+    
+    });
+  }
+
 	render() {
 		return (
 			<View style={{flex:1}}>
         {this.renderSearchBar()}
-				<FlatList
-					data={propertyListData}
-					renderItem={({item}) => this.renderPropertyListRow(item)}
-				/>
+        {this.state.isSearchingCity ? (
+				  <FlatList
+					 data={propertyListData}
+					 renderItem={({item}) => this.renderPropertyOnCityBasis(item)}
+				  />
+        ) : (
+          <FlatList
+           data={propertyListData}
+           renderItem={({item}) => this.renderPropertyListRow(item)}
+          />
+        )}  
 			</View>
 		);
 	}
@@ -31,10 +53,24 @@ export default class Home extends Component{
 		);   
 	}
 
+  renderPropertyOnCityBasis(item){
+    if(item.city==this.state.propertyCityName){
+      return(
+        <View style={styles.container}>
+          <Image source = {{uri:item.images.image1}} style={{width:400,height: 200,padding:5}} />
+          <Text style={styles.name} onPress={this.onPressPropertyName.bind(this,item)}>{item.name} </Text>
+          <Text style={styles.item} >{item.price} </Text>
+          <Text style={styles.item} >{item.address} </Text>
+          <Text style={styles.item}>{item.city}</Text>
+        </View> 
+      );
+    }
+  }
+
   renderSearchBar(){
     return(
       <View>
-        <TouchableHighlight style={styles.search} onPress={this.onPressAnywhereButton.bind(this)}>
+        <TouchableHighlight style={styles.search} onPress={this.onPressSearchCityButton.bind(this)}>
           <View style={{flexDirection:'row', flexWrap:'wrap'}}>
             <Image source={{uri: "http://www.pvhc.net/img2/lnuceeldknrdpozttbxm.png"}} style={{width:30,height:30}}/>
             <Text style={styles.searchText}>{'Search City'}</Text>
@@ -44,8 +80,12 @@ export default class Home extends Component{
     )  
   }
 
-  onPressAnywhereButton(){
+  onPressSearchCityButton(){
     Actions.searchCity();
+    this.setState({
+      isSearchingCity:true,
+      propertyCityName:this.props.cityNameObtained
+    });
   }
 }
 
