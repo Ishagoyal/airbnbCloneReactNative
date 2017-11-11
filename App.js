@@ -24,7 +24,6 @@ export default class App extends Component{
 		return (
 			<Router>
 				<Scene key="root">
-					<Scene key="home" component={Home} title="Home" initial={true} />
 					<Scene key="property" component={Property} title="Property" />
           <Scene key="bookProperty" component={BookProperty} title="BookProperty" />
           <Scene key="editProfile" component={EditProfile} title="EditProfile"/>

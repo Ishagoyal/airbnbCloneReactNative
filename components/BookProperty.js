@@ -15,6 +15,7 @@ export default class BookProperty extends Component{
       displayStartDate : this.props.startDate,
       displayEndDate : this.props.endDate
     });
+    console.log(this.props.startDate);
   }
 
   reviewYourTripDetails(){

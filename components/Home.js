@@ -3,27 +3,29 @@ import { View, Text, FlatList, StyleSheet, Image,TouchableHighlight } from 'reac
 import { Actions } from 'react-native-router-flux';
 import propertyListData from '../utils/data.json';
 
+var isSearchingCity = false;
+
 export default class Home extends Component{
 
   constructor(props){
     super(props);
     this.state = {
-      propertyCityName:'',
-      isSearchingCity:false,
+      propertyCityName:'hi',
     }
   }
 
   componentDidMount(){
     this.setState({
-    
+      propertyCityName:this.props.cityNameObtained
     });
   }
 
 	render() {
+    console.log(isSearchingCity);
 		return (
 			<View style={{flex:1}}>
         {this.renderSearchBar()}
-        {this.state.isSearchingCity ? (
+        {isSearchingCity ? (
 				  <FlatList
 					 data={propertyListData}
 					 renderItem={({item}) => this.renderPropertyOnCityBasis(item)}
@@ -54,7 +56,11 @@ export default class Home extends Component{
 	}
 
   renderPropertyOnCityBasis(item){
+    console.log(item.city);
+    console.log(this.state.propertyCityName);
+    console.log(this.props.cityNameObtained);
     if(item.city==this.state.propertyCityName){
+    //if(item.city==this.props.cityNameObtained){
       return(
         <View style={styles.container}>
           <Image source = {{uri:item.images.image1}} style={{width:400,height: 200,padding:5}} />
@@ -81,11 +87,8 @@ export default class Home extends Component{
   }
 
   onPressSearchCityButton(){
+    isSearchingCity=true;
     Actions.searchCity();
-    this.setState({
-      isSearchingCity:true,
-      propertyCityName:this.props.cityNameObtained
-    });
   }
 }
 
