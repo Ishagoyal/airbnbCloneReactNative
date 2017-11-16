@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, ScrollView,TouchableHighlight } from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView,TouchableHighlight} from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
 export default class Profile extends Component{
@@ -29,28 +29,52 @@ export default class Profile extends Component{
         </View>
         <Text style={styles.editProfile} onPress={this.onPressEditProfile.bind(this)}>{'View and Edit Profile'}</Text>
         <TouchableHighlight onPress={this.onPressNotifications} style={styles.button}>
-          <Text style={styles.buttonText}>Notifications</Text>
+          <View style={{flexDirection:'row', flexWrap:'wrap'}}>
+            <Text style={styles.buttonText}>Notifications</Text>
+            <Image source={{uri: "https://www.materialui.co/materialIcons/social/notifications_grey_192x192.png"}} style={{width:30,height:30,marginLeft:185}}/>
+          </View>
         </TouchableHighlight>
         <TouchableHighlight onPress={this.onPressCreditsAndCoupons} style={styles.button}>
-          <Text style={styles.buttonText}>Credits & Coupons</Text>
+          <View style={{flexDirection:'row', flexWrap:'wrap'}}>
+            <Text style={styles.buttonText}>Credits & Coupons</Text>
+            <Image source={{uri: "https://cdn2.iconfinder.com/data/icons/medicine-9/512/discount_labels-512.png"}} style={{width:30,height:30,marginLeft:140}}/>
+          </View> 
         </TouchableHighlight>
         <TouchableHighlight onPress={this.onPressInviteFriends} style={styles.button}>
-          <Text style={styles.buttonText}>Invite Friends</Text>
+          <View style={{flexDirection:'row', flexWrap:'wrap'}}>
+            <Text style={styles.buttonText}>Invite Friends</Text>
+            <Image source={{uri: "https://cdn2.iconfinder.com/data/icons/e-commerce-4/256/Gift-256.png"}} style={{width:25,height:25,marginLeft:180}}/>
+          </View>  
         </TouchableHighlight>
         <TouchableHighlight onPress={this.onPressPayments} style={styles.button}>
-          <Text style={styles.buttonText}>Payments</Text>
+          <View style={{flexDirection:'row', flexWrap:'wrap'}}>
+            <Text style={styles.buttonText}>Payments</Text>
+            <Image source={{uri: "https://cdn4.iconfinder.com/data/icons/money/512/21-512.png"}} style={{width:30,height:30,marginLeft:205}}/>
+          </View>  
         </TouchableHighlight>
         <TouchableHighlight onPress={this.onPressListYourSpace} style={styles.button}>
-          <Text style={styles.buttonText}>List Your Space</Text>
+          <View style={{flexDirection:'row', flexWrap:'wrap'}}>
+            <Text style={styles.buttonText}>List Your Space</Text>
+            <Image source={{uri: "https://cdn2.iconfinder.com/data/icons/real-estate-19/24/real-estate-add-512.png"}} style={{width:30,height:30,marginLeft:165}}/>
+          </View>  
         </TouchableHighlight>
         <TouchableHighlight onPress={this.onPressSettings} style={styles.button}>
-          <Text style={styles.buttonText}>Settings</Text>
+          <View style={{flexDirection:'row', flexWrap:'wrap'}}>
+            <Text style={styles.buttonText}>Settings</Text>
+            <Image source={{uri: "https://cdn3.iconfinder.com/data/icons/fez/512/FEZ-04-512.png"}} style={{width:25,height:25,marginLeft:220}}/>
+          </View>  
         </TouchableHighlight>
         <TouchableHighlight onPress={this.onPressGetHelp} style={styles.button}>
-          <Text style={styles.buttonText}>Get Help</Text>
+          <View style={{flexDirection:'row', flexWrap:'wrap'}}>
+            <Text style={styles.buttonText}>Get Help</Text>
+            <Image source={{uri: "https://www.newsrx.com/Butter/images/icon-help-dark.png"}} style={{width:25,height:25,marginLeft:220}}/>
+          </View>  
         </TouchableHighlight>
         <TouchableHighlight onPress={this.onPressGiveFeedback} style={styles.giveFeedbackButton}>
-          <Text style={styles.buttonText}>Give us Feedback</Text>
+          <View style={{flexDirection:'row', flexWrap:'wrap'}}>
+            <Text style={styles.buttonText}>Give us Feedback</Text>
+            <Image source={{uri: "https://www.prodpad.com/wp-content/uploads/2014/05/icon-comments1.png"}} style={{width:25,height:25,marginLeft:155}}/>
+          </View>  
         </TouchableHighlight>
       </ScrollView>
     )
@@ -146,6 +170,6 @@ const styles = StyleSheet.create({
   },
   buttonText:{
     fontWeight:'bold',
-    fontSize:16
+    fontSize:16,
   }
 })

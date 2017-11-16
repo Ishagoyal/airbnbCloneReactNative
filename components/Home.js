@@ -4,19 +4,21 @@ import { Actions } from 'react-native-router-flux';
 import propertyListData from '../utils/data.json';
 
 var isSearchingCity = false;
+var  isResetButtonNotPressed = true;
 
 export default class Home extends Component{
 
   constructor(props){
     super(props);
     this.state = {
-      propertyCityName:'hi',
+      propertyCityName:this.props.cityNameObtained,
+     
     }
   }
 
   componentDidMount(){
     this.setState({
-      propertyCityName:this.props.cityNameObtained
+      //propertyCityName:this.props.cityNameObtained
     });
   }
 
@@ -25,6 +27,9 @@ export default class Home extends Component{
 		return (
 			<View style={{flex:1}}>
         {this.renderSearchBar()}
+        <TouchableHighlight style={styles.reset} onPress={this.onPressResetAllButton.bind(this)}>
+          <Text style={styles.resetText}>Reset All</Text>
+        </TouchableHighlight>
         {isSearchingCity ? (
 				  <FlatList
 					 data={propertyListData}
@@ -56,9 +61,6 @@ export default class Home extends Component{
 	}
 
   renderPropertyOnCityBasis(item){
-    console.log(item.city);
-    console.log(this.state.propertyCityName);
-    console.log(this.props.cityNameObtained);
     if(item.city==this.state.propertyCityName){
     //if(item.city==this.props.cityNameObtained){
       return(
@@ -67,7 +69,6 @@ export default class Home extends Component{
           <Text style={styles.name} onPress={this.onPressPropertyName.bind(this,item)}>{item.name} </Text>
           <Text style={styles.item} >{item.price} </Text>
           <Text style={styles.item} >{item.address} </Text>
-          <Text style={styles.item}>{item.city}</Text>
         </View> 
       );
     }
@@ -89,6 +90,15 @@ export default class Home extends Component{
   onPressSearchCityButton(){
     isSearchingCity=true;
     Actions.searchCity();
+  }
+
+  onPressResetAllButton(){
+   /* this.setState({
+      isResetButtonNotPressed:false
+    });*/
+
+    isResetButtonNotPressed=false;
+    isSearchingCity=false;
   }
 }
 
@@ -127,5 +137,22 @@ const styles = StyleSheet.create({
     fontWeight:'bold',
     marginLeft:20,
     fontSize:16,
+  },
+  reset:{
+    padding:10,
+    borderWidth:1,
+    margin:5,
+    marginLeft:275,
+    marginTop:10,
+    borderColor:'#4F94CD',
+    backgroundColor:'#4F94CD',
+    borderRadius:5,
+    width:80
+  },
+  resetText:{
+    color:'white',
+    fontWeight:'bold',
+    fontSize:14,
   }
+
 })
