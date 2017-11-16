@@ -4,7 +4,7 @@ import { Actions } from 'react-native-router-flux';
 import propertyListData from '../utils/data.json';
 
 var isSearchingCity = false;
-var  isResetButtonNotPressed = true;
+//var  isResetButtonNotPressed = true;
 
 export default class Home extends Component{
 
@@ -62,7 +62,6 @@ export default class Home extends Component{
 
   renderPropertyOnCityBasis(item){
     if(item.city==this.state.propertyCityName){
-    //if(item.city==this.props.cityNameObtained){
       return(
         <View style={styles.container}>
           <Image source = {{uri:item.images.image1}} style={{width:400,height: 200,padding:5}} />
@@ -97,7 +96,7 @@ export default class Home extends Component{
       isResetButtonNotPressed:false
     });*/
 
-    isResetButtonNotPressed=false;
+    //isResetButtonNotPressed=false;
     isSearchingCity=false;
   }
 }
