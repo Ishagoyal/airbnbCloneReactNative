@@ -1,30 +1,26 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList, StyleSheet, Image,TouchableHighlight } from 'react-native';
+import { View, Text, FlatList, StyleSheet, Image,TouchableHighlight, TextInput } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import propertyListData from '../utils/data.json';
-
-//var isSearchingCity = false;
-//var  isResetButtonNotPressed = true;
 
 export default class Home extends Component{
 
   constructor(props){
     super(props);
     this.state = {
-      propertyCityName:this.props.cityNameObtained,
-      isSearchingCity:false 
+      propertyCityName:'',
+      isSearchingCity:false,
+      searchCityName:'',
     }
   }
 
-	render() {
-    console.log(this.state.isSearchingCity);
+	render(){
+    const isSearchingCity = this.state.isSearchingCity;
+    console.log(isSearchingCity);
 		return (
 			<View style={{flex:1}}>
         {this.renderSearchBar()}
-        <TouchableHighlight style={styles.reset} onPress={this.onPressResetAllButton.bind(this)}>
-          <Text style={styles.resetText}>Reset All</Text>
-        </TouchableHighlight>
-        {this.state.isSearchingCity ? (
+        {isSearchingCity ? (
 				  <FlatList
 					 data={propertyListData}
 					 renderItem={({item}) => this.renderPropertyOnCityBasis(item)}
@@ -55,6 +51,7 @@ export default class Home extends Component{
 	}
 
   renderPropertyOnCityBasis(item){
+    console.log(item.city==this.state.propertyCityName);
     if(item.city==this.state.propertyCityName){
       return(
         <View style={styles.container}>
@@ -68,36 +65,40 @@ export default class Home extends Component{
   }
 
   renderSearchBar(){
-    return(
+    return( 
       <View>
-        <TouchableHighlight style={styles.search} onPress={this.onPressSearchCityButton.bind(this)}>
-          <View style={{flexDirection:'row', flexWrap:'wrap'}}>
-            <Image source={{uri: "http://www.pvhc.net/img2/lnuceeldknrdpozttbxm.png"}} style={{width:30,height:30}}/>
-            <Text style={styles.searchText}>{'Search City'}</Text>
-          </View>  
-        </TouchableHighlight>
+        <TextInput 
+          style={styles.city}
+          onChangeText={(text) => this.setState({searchCityName:text})}
+          underlineColorAndroid='rgba(0,0,0,0)'
+          placeholder="Where To?"
+          onSubmitEditing={this.onPressSearchButton}
+        >  
+        </TextInput>
+        <View style={{flexDirection:'row', flexWrap:'wrap'}}>
+          <TouchableHighlight style={styles.searchButton} onPress={()=>this.onPressSearchButton(this.state.searchCityName)}>
+            <Text style={styles.searchText}>{'Search'}</Text>
+          </TouchableHighlight>
+          <TouchableHighlight style={styles.reset} onPress={this.onPressResetAllButton.bind(this)}>
+            <Text style={styles.resetText}>Reset All</Text>
+          </TouchableHighlight>
+        </View>  
       </View>
-    )  
-  }
-
-  onPressSearchCityButton(){
-    this.setState({
-      isSearchingCity:true
-    })
-    //isSearchingCity=true;
-    Actions.searchCity();
+    );  
   }
 
   onPressResetAllButton(){
-   /* this.setState({
-      isResetButtonNotPressed:false
-    });*/
-
-    //isResetButtonNotPressed=false;
-    //isSearchingCity=false;
     this.setState({
-      isSearchingCity:false
-    })
+      isSearchingCity:false,
+    });
+  }
+
+  onPressSearchButton(cityName){
+    this.setState({
+      isSearchingCity:true,
+      propertyCityName:cityName
+    });
+    console.log(cityName);
   }
 }
 
@@ -122,36 +123,54 @@ const styles = StyleSheet.create({
     paddingTop:5,
     paddingLeft:5
   },
-  search:{
-    padding:10,
-    borderWidth:1,
-    margin:5,
-    marginTop:10,
-    borderColor:'#20b2aa',
-    backgroundColor:'#20b2aa',
-    borderRadius:5
-  },
-  searchText:{
-    color:'white',
-    fontWeight:'bold',
-    marginLeft:20,
-    fontSize:16,
-  },
   reset:{
     padding:10,
     borderWidth:1,
     margin:5,
-    marginLeft:275,
-    marginTop:10,
-    borderColor:'#4F94CD',
+    marginLeft:60,
+    marginTop:20,
+    marginBottom:20,
+    borderColor:'white',
     backgroundColor:'#4F94CD',
     borderRadius:5,
-    width:80
+    width:120,
+    alignItems:'center',
   },
   resetText:{
     color:'white',
     fontWeight:'bold',
-    fontSize:14,
+    fontSize:18,
+  },
+  city:{
+    height:50,
+    borderBottomWidth:1,
+    borderColor:'white',
+    padding:10,
+    margin:5,
+    marginTop:10,
+    color:'white',
+    fontWeight:'bold',
+    fontSize:18,
+    backgroundColor:'#20b2aa',
+  },
+  searchButton:{
+    borderWidth:1,
+    borderColor:'white',
+    padding:10,
+    margin:5,
+    marginTop:20,
+    marginBottom:20,
+    borderRadius:5,
+    marginLeft:30,
+    width:120,
+    alignItems:'center',
+    borderColor:'#4F94CD',
+    backgroundColor:'#4F94CD',
+  },
+  searchText:{
+    color:'white',
+    fontWeight:'bold',
+    fontSize:18,
   }
 
 })
