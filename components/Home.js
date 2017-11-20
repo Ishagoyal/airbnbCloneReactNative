@@ -3,7 +3,7 @@ import { View, Text, FlatList, StyleSheet, Image,TouchableHighlight } from 'reac
 import { Actions } from 'react-native-router-flux';
 import propertyListData from '../utils/data.json';
 
-var isSearchingCity = false;
+//var isSearchingCity = false;
 //var  isResetButtonNotPressed = true;
 
 export default class Home extends Component{
@@ -12,25 +12,19 @@ export default class Home extends Component{
     super(props);
     this.state = {
       propertyCityName:this.props.cityNameObtained,
-     
+      isSearchingCity:false 
     }
   }
 
-  componentDidMount(){
-    this.setState({
-      //propertyCityName:this.props.cityNameObtained
-    });
-  }
-
 	render() {
-    console.log(isSearchingCity);
+    console.log(this.state.isSearchingCity);
 		return (
 			<View style={{flex:1}}>
         {this.renderSearchBar()}
         <TouchableHighlight style={styles.reset} onPress={this.onPressResetAllButton.bind(this)}>
           <Text style={styles.resetText}>Reset All</Text>
         </TouchableHighlight>
-        {isSearchingCity ? (
+        {this.state.isSearchingCity ? (
 				  <FlatList
 					 data={propertyListData}
 					 renderItem={({item}) => this.renderPropertyOnCityBasis(item)}
@@ -87,7 +81,10 @@ export default class Home extends Component{
   }
 
   onPressSearchCityButton(){
-    isSearchingCity=true;
+    this.setState({
+      isSearchingCity:true
+    });
+    //isSearchingCity=true;
     Actions.searchCity();
   }
 
@@ -97,7 +94,10 @@ export default class Home extends Component{
     });*/
 
     //isResetButtonNotPressed=false;
-    isSearchingCity=false;
+    //isSearchingCity=false;
+    this.setState({
+      isSearchingCity:false
+    });
   }
 }
 

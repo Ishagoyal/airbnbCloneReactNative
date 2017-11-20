@@ -22,8 +22,11 @@ export default class BookProperty extends Component{
       <View>
         <Text style={styles.heading}> {'Review your Trip Details'}</Text>
         <View style={{flexDirection:'row', flexWrap:'wrap'}}>
-          <Text style={styles.dateText}> {'Dates'}</Text>
+          <Text style={styles.dateText}>{'Dates'}</Text>
           <Text style={styles.dates}>{this.state.displayStartDate} TO {this.state.displayEndDate}</Text>
+        </View>  
+        <View style={{flexDirection:'row', flexWrap:'wrap'}}>
+          <Text style={styles.dateText}>{'Guests'}</Text>
         </View>  
       </View>
     )
