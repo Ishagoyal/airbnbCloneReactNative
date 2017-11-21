@@ -35,6 +35,48 @@ export default class Home extends Component{
 		);
 	}
 
+  render(){
+    const isSearchingCity = this.state.isSearchingCity;
+    console.log(isSearchingCity);
+    return (
+      <View style={{flex:1}}>
+        {this.renderSearchBar()}
+        {isSearchingCity ? (
+          <FlatList
+           data={propertyListData}
+           renderItem={({item}) => this.renderPropertyOnCityBasis(item)}
+          />
+        ) : (
+          <FlatList
+           data={propertyListData}
+           renderItem={({item}) => this.renderPropertyListRow(item)}
+          />
+        )}  
+      </View>
+    );
+  }
+
+  render(){
+    const isSearchingCity = this.state.isSearchingCity;
+    console.log(isSearchingCity);
+    return (
+      <View style={{flex:1}}>
+        {this.renderSearchBar()}
+        {isSearchingCity ? (
+          <FlatList
+            data={propertyListData}
+            renderItem={({item}) => this.renderPropertyOnCityBasis(item)}
+          />
+        ) : (
+          <FlatList
+            data={propertyListData}
+            renderItem={({item}) => this.renderPropertyListRow(item)}
+          />
+        )}  
+      </View>
+    );
+  }
+
   renderList(){
 
   }
