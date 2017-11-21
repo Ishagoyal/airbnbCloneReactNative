@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native'; 
+import { Actions } from 'react-native-router-flux';
 
 export default class BookProperty extends Component{
   constructor(props){
     super(props);
     this.state = {
       displayStartDate:'',
-      displayEndDate:''
+      displayEndDate:'',
+      guestNumber:'1',
     }
   }
 
@@ -17,6 +19,24 @@ export default class BookProperty extends Component{
     });
   }
 
+  render(){
+    return(
+      <ScrollView style={styles.container}>
+        <Text style={styles.item}>{'Step 1 of 5'}</Text>
+        {this.reviewYourTripDetails()}
+      </ScrollView>
+    )
+  }
+
+	/*render(){
+		return(
+      <ScrollView style={styles.container}>
+        <Text style={styles.item}>{'Step 1 of 5'}</Text>
+        {this.reviewYourTripDetails()}
+      </ScrollView>
+    )
+	}*/
+
   reviewYourTripDetails(){
     return(
       <View>
@@ -25,18 +45,17 @@ export default class BookProperty extends Component{
           <Text style={styles.dateText}> {'Dates'}</Text>
           <Text style={styles.dates}>{this.state.displayStartDate} TO {this.state.displayEndDate}</Text>
         </View>  
+        <View style={{flexDirection:'row', flexWrap:'wrap'}}>
+          <Text style={styles.dateText}> {'Guests'}</Text>
+          <Text style={styles.dates} onPress={this.onPressNumberOfGuests.bind(this)}>{this.state.guestNumber} {'Guests'}</Text>
+        </View> 
       </View>
     )
   }
 
-	render(){
-		return(
-      <ScrollView style={styles.container}>
-        <Text style={styles.item}>{'Step 1 of 5'}</Text>
-        {this.reviewYourTripDetails()}
-      </ScrollView>
-    )
-	}
+  onPressNumberOfGuests(){
+    Actions.guests();
+  } 
 }
 const styles = StyleSheet.create({
   container: {

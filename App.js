@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {Router,Scene} from 'react-native-router-flux';
+import {Router,Scene, Modal} from 'react-native-router-flux';
 import {StyleSheet} from 'react-native';
 import Home from './components/Home';
 import Property from './components/Property';
@@ -18,24 +18,28 @@ import Settings from './components/Settings';
 import GetHelp from './components/GetHelp';
 import GiveFeedback from './components/GiveFeedback';
 import SearchCity from './components/SearchCity';
+import GuestNumber from './components/GuestNumber';
 
 export default class App extends Component{
 	render() {
 		return (
 			<Router>
-				<Scene key="root">
-					<Scene key="property" component={Property} title="Property" />
-          <Scene key="bookProperty" component={BookProperty} title="BookProperty" />
-          <Scene key="editProfile" component={EditProfile} title="EditProfile"/>
-          <Scene key="notifications" component={Notifications} title="Notifications"/>
-          <Scene key="creditsAndCoupons" component={CreditsAndCoupons} title="CreditsAndCoupons"/>
-          <Scene key="inviteFriends" component={InviteFriends} title="InviteFriends"/>
-          <Scene key="payments" component={Payments} title="Payments"/>
-          <Scene key="settings" component={Settings} title="Settings"/>
-          <Scene key="getHelp" component={GetHelp} title="GetHelp"/>
-          <Scene key="giveFeedback" component={GiveFeedback} title="GiveFeedback"/>
-          <Scene key="searchCity" component={SearchCity} title="SearchCity"/>
-          <Scene  
+        <Scene key="modal" component={Modal}>
+				  <Scene key="root">
+					  <Scene key="property" component={Property} title="Property" />
+            <Scene key="bookProperty" component={BookProperty} title="BookProperty" >
+            </Scene>  
+            <Scene key="guests" component={GuestNumber} schema="modal" title="GuestNumber" direction="vertical"/>
+            <Scene key="editProfile" component={EditProfile} title="EditProfile"/>
+            <Scene key="notifications" component={Notifications} title="Notifications"/>
+            <Scene key="creditsAndCoupons" component={CreditsAndCoupons} title="CreditsAndCoupons"/>
+            <Scene key="inviteFriends" component={InviteFriends} title="InviteFriends"/>
+            <Scene key="payments" component={Payments} title="Payments"/>
+            <Scene key="settings" component={Settings} title="Settings"/>
+            <Scene key="getHelp" component={GetHelp} title="GetHelp"/>
+            <Scene key="giveFeedback" component={GiveFeedback} title="GiveFeedback"/>
+            <Scene key="searchCity" component={SearchCity} title="SearchCity"/>
+            <Scene  
               key="tabbar"
               tabs
               swipeEnabled={false}
@@ -95,8 +99,9 @@ export default class App extends Component{
               >
                 <Scene key="myProfile" title="Profile" component={Profile}/>
               </Scene>
-          </Scene>
-				</Scene>	
+            </Scene>
+				  </Scene>
+        </Scene>   
 			</Router>
 		)
 	}

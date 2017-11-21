@@ -11,12 +11,6 @@ export default class SearchCity extends Component{
     }
   }
 
-  componentDidMount(){
-    this.setState({
-      
-    });
-  }
-
 	render(){
     return(
       <View style={styles.container}>
