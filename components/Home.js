@@ -96,6 +96,17 @@ export default class Home extends Component{
 		);   
 	}
 
+  renderPropertyListRow(item){
+    return(
+      <View style={styles.container}>
+        <Image source = {{uri:item.images.image1}} style={{width:400,height: 200,padding:5}} />
+        <Text style={styles.name} onPress={this.onPressPropertyName.bind(this,item)}>{item.name} </Text>
+        <Text style={styles.item} >{item.price} </Text>
+        <Text style={styles.item} >{item.address} </Text>
+      </View> 
+    );   
+  }
+
   renderPropertyOnCityBasis(item){
     console.log(item.city==this.state.propertyCityName);
     console.log(item.city);
