@@ -21,12 +21,12 @@ import SearchCity from './components/SearchCity';
 import GuestNumber from './components/GuestNumber';
 
 export default class App extends Component{
-	render() {
-		return (
-			<Router>
+  render() {
+    return (
+      <Router>
         <Scene key="modal" component={Modal}>
-				  <Scene key="root">
-					  <Scene key="property" component={Property} title="Property" />
+          <Scene key="root">
+            <Scene key="property" component={Property} title="Property" />
             <Scene key="bookProperty" component={BookProperty} title="BookProperty" >
             </Scene>  
             <Scene key="guests" component={GuestNumber} schema="modal" title="GuestNumber" direction="vertical"/>
@@ -100,11 +100,11 @@ export default class App extends Component{
                 <Scene key="myProfile" title="Profile" component={Profile}/>
               </Scene>
             </Scene>
-				  </Scene>
+          </Scene>
         </Scene>   
-			</Router>
-		)
-	}
+      </Router>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
