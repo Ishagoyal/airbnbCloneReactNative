@@ -28,14 +28,32 @@ export default class BookProperty extends Component{
     )
   }
 
-	/*render(){
-		return(
+  render(){
+    return(
       <ScrollView style={styles.container}>
         <Text style={styles.item}>{'Step 1 of 5'}</Text>
         {this.reviewYourTripDetails()}
       </ScrollView>
     )
-	}*/
+  }
+
+  render(){
+    return(
+      <ScrollView style={styles.container}>
+        <Text style={styles.item}>{'Step 1 of 5'}</Text>
+        {this.reviewYourTripDetails()}
+      </ScrollView>
+    )
+  }
+
+  /*render(){
+    return(
+      <ScrollView style={styles.container}>
+        <Text style={styles.item}>{'Step 1 of 5'}</Text>
+        {this.reviewYourTripDetails()}
+      </ScrollView>
+    )
+  }*/
 
   reviewYourTripDetails(){
     return(
