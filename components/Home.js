@@ -15,12 +15,19 @@ export default class Home extends Component{
   }
 
   render(){
-    const isSearchingCity = this.state.isSearchingCity;
-    console.log(isSearchingCity);
     return (
       <View style={{flex:1}}>
         {this.renderSearchBar()}
-        {isSearchingCity ? (
+        {this.renderList()}
+      </View>
+    );
+  }
+
+  
+  renderList(){
+    return(
+      <View>
+        {this.state.isSearchingCity ? (
           <FlatList
            data={propertyListData}
            renderItem={({item}) => this.renderPropertyOnCityBasis(item)}
@@ -33,11 +40,6 @@ export default class Home extends Component{
         )}  
       </View>
     );
-  }
-
-  
-  renderList(){
-
   }
 
   onPressPropertyName(item){
