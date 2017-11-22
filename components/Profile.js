@@ -18,8 +18,8 @@ export default class Profile extends Component{
       displayPrrofilePic: 'https://uzateka.com/images/profil.png',
     });
   }
-
-	render(){
+  
+  render(){  
     return(
       <ScrollView style={styles.container}>
         <Text style={styles.heading}>{'My Profile'}</Text>

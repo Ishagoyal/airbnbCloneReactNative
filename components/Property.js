@@ -15,8 +15,9 @@ import { Actions } from 'react-native-router-flux';
 import Swiper from 'react-native-swiper';
 
 export default class Property extends Component{
-	constructor(props){
-		super(props);
+	
+  constructor(props){
+    super(props);
     this.state = {
       displayName: '',
       displayPrice: '',
@@ -30,8 +31,8 @@ export default class Property extends Component{
     this.openCalendarForCheckIn = this.openCalendarForCheckIn.bind(this);
     this.openCalendarForCheckOut = this.openCalendarForCheckOut.bind(this);
     this.displayConfirmButton = this.displayConfirmButton.bind(this);
-	}
-  
+  }
+
   componentDidMount(){
     this.setState({
       displayName: propertyDetailsData[0].name,

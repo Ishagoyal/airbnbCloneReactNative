@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
 export default class Inbox extends Component{
-	render(){
+  render(){
     return(
       <View>
         <Text>{'No messgaes yet!'}</Text>

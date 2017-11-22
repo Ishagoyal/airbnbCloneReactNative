@@ -14,27 +14,6 @@ export default class Home extends Component{
     }
   }
 
-	render(){
-    const isSearchingCity = this.state.isSearchingCity;
-    console.log(isSearchingCity);
-		return (
-			<View style={{flex:1}}>
-        {this.renderSearchBar()}
-        {isSearchingCity ? (
-				  <FlatList
-					 data={propertyListData}
-					 renderItem={({item}) => this.renderPropertyOnCityBasis(item)}
-				  />
-        ) : (
-          <FlatList
-           data={propertyListData}
-           renderItem={({item}) => this.renderPropertyListRow(item)}
-          />
-        )}  
-			</View>
-		);
-	}
-
   render(){
     const isSearchingCity = this.state.isSearchingCity;
     console.log(isSearchingCity);
@@ -56,45 +35,14 @@ export default class Home extends Component{
     );
   }
 
-  render(){
-    const isSearchingCity = this.state.isSearchingCity;
-    console.log(isSearchingCity);
-    return (
-      <View style={{flex:1}}>
-        {this.renderSearchBar()}
-        {isSearchingCity ? (
-          <FlatList
-            data={propertyListData}
-            renderItem={({item}) => this.renderPropertyOnCityBasis(item)}
-          />
-        ) : (
-          <FlatList
-            data={propertyListData}
-            renderItem={({item}) => this.renderPropertyListRow(item)}
-          />
-        )}  
-      </View>
-    );
-  }
-
+  
   renderList(){
 
   }
 
-	onPressPropertyName(item){
-		Actions.property({propertyId: item.id});  
-	}   
-
-	renderPropertyListRow(item){
-		return(
-			<View style={styles.container}>
-        <Image source = {{uri:item.images.image1}} style={{width:400,height: 200,padding:5}} />
-				<Text style={styles.name} onPress={this.onPressPropertyName.bind(this,item)}>{item.name} </Text>
-				<Text style={styles.item} >{item.price} </Text>
-				<Text style={styles.item} >{item.address} </Text>
-			</View> 
-		);   
-	}
+  onPressPropertyName(item){
+    Actions.property({propertyId: item.id});  
+  }  
 
   renderPropertyListRow(item){
     return(
@@ -162,18 +110,18 @@ export default class Home extends Component{
 
 
 const styles = StyleSheet.create({
-	container: {
+  container: {
     flexDirection:'row',
     flexWrap:'wrap',
     flex: 1,
     paddingTop: 10
-	},
-	item: {
-		padding: 5,
-		fontSize: 12,
-		height: 30,
+  },
+  item: {
+    padding: 5,
+    fontSize: 12,
+    height: 30,
     fontWeight:'bold',
-	},
+  },
   name:{
     fontSize:14,
     fontWeight:'bold',

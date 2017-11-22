@@ -3,7 +3,8 @@ import { View, Text } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
 export default class Saved extends Component{
-	render(){
+	
+  render(){  
     return(
       <View>
         <Text>{'When you see something you like, tap on the heart to save it. If you are planning a trip with others, invite them so they can save and vote on their favorites.'}</Text>

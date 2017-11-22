@@ -3,7 +3,8 @@ import { View, Text } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
 export default class Trips extends Component{
-	render(){
+	
+  render(){
     return(
       <View>
         <Text>{'You have not done any trips yet'}</Text>

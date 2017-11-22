@@ -11,7 +11,7 @@ export default class SearchCity extends Component{
     }
   }
 
-	render(){
+  render(){  
     return(
       <View style={styles.container}>
         <TextInput 
