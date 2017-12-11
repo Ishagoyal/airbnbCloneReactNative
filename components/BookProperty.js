@@ -9,7 +9,8 @@ export default class BookProperty extends Component{
       displayStartDate:'',
       displayEndDate:'',
       guestNumber:'1',
-    }
+    };
+    this.onPressNumberOfGuests = this.onPressNumberOfGuests.bind(this);
   }
 
   componentDidMount(){
@@ -34,18 +35,18 @@ export default class BookProperty extends Component{
         <Text style={styles.heading}> {'Review your Trip Details'}</Text>
         <View style={{flexDirection:'row', flexWrap:'wrap'}}>
           <Text style={styles.dateText}> {'Dates'}</Text>
-          <Text style={styles.dates}>{this.state.displayStartDate} TO {this.state.displayEndDate}</Text>
+          <Text style={styles.dates}>{this.state.displayStartDate} {'TO'} {this.state.displayEndDate}</Text>
         </View>  
         <View style={{flexDirection:'row', flexWrap:'wrap'}}>
           <Text style={styles.dateText}> {'Guests'}</Text>
-          <Text style={styles.dates} onPress={this.onPressNumberOfGuests.bind(this)}>{this.state.guestNumber} {'Guests'}</Text>
+          <Text style={styles.guests} onPress={this.onPressNumberOfGuests.bind(this.state.displayStartDate,this.state.displayEndDate)}>{this.state.guestNumber} {'Guests'}</Text>
         </View> 
       </View>
     )
   }
 
-  onPressNumberOfGuests(){
-    Actions.guests();
+  onPressNumberOfGuests(startDateDisplay, endDateDisplay){
+    Actions.guests({startDate: startDateDisplay,endDate:endDateDisplay});
   } 
 }
 const styles = StyleSheet.create({
@@ -75,5 +76,12 @@ const styles = StyleSheet.create({
     marginTop:30,
     fontWeight:'bold',
     color:'#20b2aa',
-  }
+  },
+  guests:{
+    fontSize:16,
+    marginLeft:190,
+    marginTop:30,
+    fontWeight:'bold',
+    color:'#20b2aa',
+  },
 })

@@ -200,6 +200,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginLeft:50,
     marginRight:50,
+    padding:5,
     alignItems:'center',
   },  
 })

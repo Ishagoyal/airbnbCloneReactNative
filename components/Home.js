@@ -11,6 +11,7 @@ export default class Home extends Component{
       propertyCityName:'',
       isSearchingCity:false,
       searchCityName:'',
+      isPropertyExists:false,
     }
   }
 
@@ -22,24 +23,51 @@ export default class Home extends Component{
       </View>
     );
   }
-
   
   renderList(){
-    return(
-      <View>
+    if(this.state.isSearchingCity){
+      return(
+        <View style={{flex:1}}>
+          <FlatList
+           data={propertyListData}
+           renderItem={({item}) => this.renderPropertyOnCityBasis(item)}
+           keyExtractor={(item, index) => item.id}
+           key="renderPropertyOfACity"
+          />
+        </View>
+      )
+    }
+    else if(!this.state.isSearchingCity){
+      return(
+        <View style={{flex:1}}>
+          <FlatList
+           data={propertyListData}
+           renderItem={({item}) => this.renderPropertyListRow(item)}
+           keyExtractor={(item, index) => item.id}
+           key="renderAllPropertyList"
+          />
+        </View>
+      )
+    }
+   /* return(
+      <View style={{flex:1}}>
         {this.state.isSearchingCity ? (
           <FlatList
            data={propertyListData}
            renderItem={({item}) => this.renderPropertyOnCityBasis(item)}
+           keyExtractor={(item, index) => item.id}
+           key="renderPropertyOfACity"
           />
         ) : (
           <FlatList
            data={propertyListData}
            renderItem={({item}) => this.renderPropertyListRow(item)}
+           keyExtractor={(item, index) => item.id}
+           key="renderAllPropertyList"
           />
         )}  
       </View>
-    );
+    );*/
   }
 
   onPressPropertyName(item){
@@ -57,19 +85,28 @@ export default class Home extends Component{
     );   
   }
 
+  checkIfPropertyExistsOnCityBasis(){
+  
+  }
+
   renderPropertyOnCityBasis(item){
-    console.log(item.city==this.state.propertyCityName);
-    console.log(item.city);
     if(item.city==this.state.propertyCityName){
       return(
         <View style={styles.container}>
           <Image source = {{uri:item.images.image1}} style={{width:400,height: 200,padding:5}} />
-          <Text style={styles.name} onPress={this.onPressPropertyName.bind(this,item)}>{'item.name'} </Text>
+          <Text style={styles.name} onPress={this.onPressPropertyName.bind(this,item)}>{item.name} </Text>
           <Text style={styles.item} >{item.price} </Text>
           <Text style={styles.item} >{item.address} </Text>
         </View> 
       );
     }
+    else {
+      return(
+        <View style={styles.container}>
+          <Text style={styles.error}>{'No place found in this City!'}</Text>
+        </View>
+      )
+    }  
   }
 
   renderSearchBar(){
@@ -98,6 +135,7 @@ export default class Home extends Component{
   onPressResetAllButton(){
     this.setState({
       isSearchingCity:false,
+       searchCityName:'',
     });
   }
 
@@ -106,7 +144,6 @@ export default class Home extends Component{
       isSearchingCity:true,
       propertyCityName:cityName
     });
-    console.log(cityName);
   }
 }
 
@@ -179,6 +216,8 @@ const styles = StyleSheet.create({
     color:'white',
     fontWeight:'bold',
     fontSize:18,
-  }
+  },
+  error:{
 
+  }
 })
