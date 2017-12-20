@@ -13,8 +13,8 @@ export default class GuestNumber extends Component{
       isDeleteChildrenDisabled:true,
       infantNumber: 0,
       isDeleteInfantDisabled:true,
-      startDate:'',
-      endDate:'',
+      startDate:"hi",
+      endDate:"hello",
     };
     this.onPressSaveButton = this.onPressSaveButton.bind(this);
   }  
@@ -95,7 +95,7 @@ export default class GuestNumber extends Component{
           <Text style={styles.border}></Text>
         </ScrollView>
         <View>
-          <TouchableHighlight style={styles.save} onPress={this.onPressSaveButton.bind(this.state.startDate,this.state.endDate)}>
+          <TouchableHighlight style={styles.save} onPress={this.onPressSaveButton.bind(this,this.state.startDate,this.state.endDate)}>
             <Text style={styles.saveText}>{'Save'}</Text>
           </TouchableHighlight>
         </View>  

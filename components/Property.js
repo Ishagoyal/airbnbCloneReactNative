@@ -15,7 +15,7 @@ import { Actions } from 'react-native-router-flux';
 import Swiper from 'react-native-swiper';
 
 export default class Property extends Component{
-	
+  
   constructor(props){
     super(props);
     this.state = {

@@ -18,6 +18,8 @@ export default class BookProperty extends Component{
       displayStartDate : this.props.startDate,
       displayEndDate : this.props.endDate
     });
+   /* console.log(typeof this.props.startDate);
+    console.log(typeof this.props.endDate);*/
   }
 
   render(){
@@ -39,13 +41,13 @@ export default class BookProperty extends Component{
         </View>  
         <View style={{flexDirection:'row', flexWrap:'wrap'}}>
           <Text style={styles.dateText}> {'Guests'}</Text>
-          <Text style={styles.guests} onPress={this.onPressNumberOfGuests.bind(this.state.displayStartDate,this.state.displayEndDate)}>{this.state.guestNumber} {'Guests'}</Text>
+          <Text style={styles.guests} onPress={this.onPressNumberOfGuests.bind(this,this.state.displayStartDate,this.state.displayEndDate)}>{this.state.guestNumber} {'Guests'}</Text>
         </View> 
       </View>
     )
   }
 
-  onPressNumberOfGuests(startDateDisplay, endDateDisplay){
+  onPressNumberOfGuests(startDateDisplay : String,  endDateDisplay : String){
     Actions.guests({startDate: startDateDisplay,endDate:endDateDisplay});
   } 
 }
