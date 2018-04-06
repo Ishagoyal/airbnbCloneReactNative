@@ -3,6 +3,10 @@ import { View, Text, FlatList, StyleSheet, Image,TouchableHighlight, TextInput }
 import { Actions } from 'react-native-router-flux';
 import propertyListData from '../utils/data.json';
 
+var count=0;
+//var isPropertyExists = false;
+var objectLength = Object.keys(propertyListData).length;
+
 export default class Home extends Component{
 
   constructor(props){
@@ -11,8 +15,10 @@ export default class Home extends Component{
       propertyCityName:'',
       isSearchingCity:false,
       searchCityName:'',
-      isPropertyExists:false,
+      isPropertyExists:false
     }
+
+    this.ifPropertyExists = this.ifPropertyExists.bind(this);
   }
 
   render(){
@@ -72,6 +78,12 @@ export default class Home extends Component{
 
   onPressPropertyName(item){
     Actions.property({propertyId: item.id});  
+  }
+
+  ifPropertyExists(){
+    this.setState({
+      isPropertyExists : true
+    });
   }  
 
   renderPropertyListRow(item){
@@ -85,12 +97,13 @@ export default class Home extends Component{
     );   
   }
 
-  checkIfPropertyExistsOnCityBasis(){
   
-  }
-
   renderPropertyOnCityBasis(item){
-    if(item.city==this.state.propertyCityName){
+    this.setState((prevState) => ({
+      itemCount: prevState.itemCount + 1,
+    }));
+    if(item.city == this.state.propertyCityName){
+      {this.ifPropertyExists()}
       return(
         <View style={styles.container}>
           <Image source = {{uri:item.images.image1}} style={{width:400,height: 200,padding:5}} />
@@ -100,12 +113,12 @@ export default class Home extends Component{
         </View> 
       );
     }
-    else {
+    else if ((itemCount == objectLength) && (isPropertyExists == false)){
       return(
         <View style={styles.container}>
           <Text style={styles.error}>{'No place found in this City!'}</Text>
         </View>
-      )
+      );
     }  
   }
 

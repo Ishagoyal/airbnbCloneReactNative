@@ -122,7 +122,7 @@ export default class Property extends Component{
         <View style={{paddingTop:10, paddingBottom:10}}>
           <Button
             title="Confirm"
-            onPress={()=>this.onPressConfirmButton(this.state.startDate,this.state.endDate)}
+            onPress={this.onPressConfirmButton.bind(this,this.state.startDate,this.state.endDate, this.state.displayPrice)}
           /> 
         </View> 
       )
@@ -130,8 +130,8 @@ export default class Property extends Component{
   }
 
 
-  onPressConfirmButton(startDateDisplay, endDateDisplay){
-    Actions.bookProperty({startDate: startDateDisplay,endDate:endDateDisplay}); 
+  onPressConfirmButton(startDateDisplay, endDateDisplay, priceDisplay){
+    Actions.bookProperty({startDate: startDateDisplay,endDate:endDateDisplay, displayPrice:priceDisplay}); 
   }
 
   async openCalendarForCheckIn(){
@@ -156,7 +156,7 @@ export default class Property extends Component{
     try {
       const {action, year, month, day} = await DatePickerAndroid.open({
       date: new Date(),
-      minDate:new Date()
+      minDate: new Date()
     });
     if (action !== DatePickerAndroid.dismissedAction) {
       // Selected year, month (0-11), day

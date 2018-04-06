@@ -13,8 +13,9 @@ export default class GuestNumber extends Component{
       isDeleteChildrenDisabled:true,
       infantNumber: 0,
       isDeleteInfantDisabled:true,
-      startDate:"hi",
-      endDate:"hello",
+      startDate:"",
+      endDate:"",
+      guestNumber:1,
     };
     this.onPressSaveButton = this.onPressSaveButton.bind(this);
   }  
@@ -22,7 +23,8 @@ export default class GuestNumber extends Component{
   componentDidMount(){
     this.setState({
       startDate : this.props.startDate,
-      endDate : this.props.endDate
+      endDate : this.props.endDate,
+      displayPrice : this.props.displayPrice,
     });
   }
 
@@ -95,7 +97,9 @@ export default class GuestNumber extends Component{
           <Text style={styles.border}></Text>
         </ScrollView>
         <View>
-          <TouchableHighlight style={styles.save} onPress={this.onPressSaveButton.bind(this,this.state.startDate,this.state.endDate)}>
+          <TouchableHighlight 
+            style={styles.save} 
+            onPress={this.onPressSaveButton.bind(this,this.state.startDate,this.state.endDate, this.state.guestNumber,this.state.displayPrice,this.state.infantNumber)}>
             <Text style={styles.saveText}>{'Save'}</Text>
           </TouchableHighlight>
         </View>  
@@ -105,7 +109,8 @@ export default class GuestNumber extends Component{
 
   onPressAddAdults(){
     this.setState((prevState) => ({
-      adultNumber: prevState.adultNumber + 1 
+      adultNumber: prevState.adultNumber + 1,
+      guestNumber : prevState.guestNumber + 1,
     }));
   }
 
@@ -113,6 +118,7 @@ export default class GuestNumber extends Component{
     if(this.state.adultNumber > 1 ){
       this.setState((prevState) => ({
         adultNumber: prevState.adultNumber - 1,
+        guestNumber : prevState.guestNumber - 1,
         isDeleteAdultDisabled:false
       }));
     } 
@@ -125,7 +131,8 @@ export default class GuestNumber extends Component{
 
   onPressAddChildren(){
     this.setState((prevState) => ({
-      childrenNumber: prevState.childrenNumber + 1 
+      childrenNumber: prevState.childrenNumber + 1,
+      guestNumber:prevState.guestNumber + 1,
     }));
   }
 
@@ -133,6 +140,7 @@ export default class GuestNumber extends Component{
     if(this.state.childrenNumber > 0 ){
       this.setState((prevState) => ({
         childrenNumber: prevState.childrenNumber - 1,
+        guestNumber: prevState.guestNumber - 1,
         isDeleteChildrenDisabled:false
       }));
     } 
@@ -163,8 +171,8 @@ export default class GuestNumber extends Component{
     }
   }
 
-  onPressSaveButton(startDateDisplay, endDateDisplay){
-    Actions.bookProperty({startDate: startDateDisplay,endDate:endDateDisplay});
+  onPressSaveButton(startDateDisplay, endDateDisplay, guestNumberDisplay, bookingPriceDisplay, infantNumberDisplay){
+    Actions.bookProperty({startDate: startDateDisplay,endDate:endDateDisplay, guestNumber:guestNumberDisplay, displayPrice:bookingPriceDisplay, infantNumberCount:infantNumberDisplay});
   }
 }
 
