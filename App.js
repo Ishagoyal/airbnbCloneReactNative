@@ -1,6 +1,8 @@
 import React,{Component} from 'react';
+import { Provider } from 'react-redux';
 import {Router,Scene, Modal} from 'react-native-router-flux';
 import {StyleSheet} from 'react-native';
+import store from './store/configureStore';
 import Home from './components/Home';
 import Property from './components/Property';
 import BookProperty from './components/BookProperty';
@@ -19,87 +21,92 @@ import GetHelp from './components/GetHelp';
 import GiveFeedback from './components/GiveFeedback';
 import SearchCity from './components/SearchCity';
 import GuestNumber from './components/GuestNumber';
+import Application from './components/Application';
+
 
 export default class App extends Component{
   render() {
     return (
-      <Router>
-        <Scene key="root">
-          <Scene key="property" component={Property} title="Property" />
-          <Scene key="bookProperty" component={BookProperty} title="BookProperty" />
-          <Scene key="guests" component={GuestNumber} title="GuestNumber" direction="vertical"/>
-          <Scene key="editProfile" component={EditProfile} title="EditProfile"/>
-          <Scene key="notifications" component={Notifications} title="Notifications"/>
-          <Scene key="creditsAndCoupons" component={CreditsAndCoupons} title="CreditsAndCoupons"/>
-          <Scene key="inviteFriends" component={InviteFriends} title="InviteFriends"/>
-          <Scene key="payments" component={Payments} title="Payments"/>
-          <Scene key="settings" component={Settings} title="Settings"/>
-          <Scene key="getHelp" component={GetHelp} title="GetHelp"/>
-          <Scene key="giveFeedback" component={GiveFeedback} title="GiveFeedback"/>
-          <Scene key="searchCity" component={SearchCity} title="SearchCity"/>
-          <Scene  
-            key="tabbar"
-            tabs
-            swipeEnabled={false}
-            showLabel={false}
-            inactiveBackgroundColor='white'
-            tabBarPosition={'bottom'}
-            tabBarStyle={{backgroundColor:'orange'}}
-            initial
-          >
-            <Scene
-              key="explore" 
-              title="Explore" 
-              icon={TabIcon}
-              activeBackgroundColor="#DDD"
-              navigationBarStyle={{ backgroundColor: 'green' }}
-              titleStyle={{ color: 'white', alignSelf: 'center' }}
+      <Provider store={store}>
+        <Router>
+          <Scene key="root">
+            <Scene key="application" component={Application} title="Application" initial = {true} />
+            <Scene key="property" component={Property} title="Property" />
+            <Scene key="bookProperty" component={BookProperty} title="BookProperty" />
+            <Scene key="guests" component={GuestNumber} title="GuestNumber" direction="vertical"/>
+            <Scene key="editProfile" component={EditProfile} title="EditProfile"/>
+            <Scene key="notifications" component={Notifications} title="Notifications"/>
+            <Scene key="creditsAndCoupons" component={CreditsAndCoupons} title="CreditsAndCoupons"/>
+            <Scene key="inviteFriends" component={InviteFriends} title="InviteFriends"/>
+            <Scene key="payments" component={Payments} title="Payments"/>
+            <Scene key="settings" component={Settings} title="Settings"/>
+            <Scene key="getHelp" component={GetHelp} title="GetHelp"/>
+            <Scene key="giveFeedback" component={GiveFeedback} title="GiveFeedback"/>
+            <Scene key="searchCity" component={SearchCity} title="SearchCity"/>
+            <Scene  
+              key="tabbar"
+              tabs
+              swipeEnabled={false}
+              showLabel={false}
+              inactiveBackgroundColor='white'
+              tabBarPosition={'bottom'}
+              tabBarStyle={{backgroundColor:'orange'}}
+              //initial
             >
-              <Scene key="homes" title="Explore" component={Home}/>
+              <Scene
+                key="explore" 
+                title="Explore" 
+                icon={TabIcon}
+                activeBackgroundColor="#DDD"
+                navigationBarStyle={{ backgroundColor: 'green' }}
+                titleStyle={{ color: 'white', alignSelf: 'center' }}
+              >
+                <Scene key="homes" title="Explore" component={Home}/>
+              </Scene>
+              <Scene
+                key="trips" 
+                title="Trips" 
+                icon={TabIcon}
+                activeBackgroundColor="#DDD"
+                navigationBarStyle={{ backgroundColor: 'green' }}
+                titleStyle={{ color: 'white', alignSelf: 'center' }}
+              >
+                <Scene key="yourTrips" title="Trips" component={Trips}/>
+              </Scene>
+              <Scene 
+                key="saved" 
+                title="Saved" 
+                icon={TabIcon}
+                activeBackgroundColor="#DDD"
+                navigationBarStyle={{ backgroundColor: 'green' }}
+                titleStyle={{ color: 'white', alignSelf: 'center' }}
+              >
+                <Scene key="yourSavedPlaces" title="Saved" component={Saved}/>
+              </Scene>
+              <Scene 
+                key="inbox" 
+                title="Inbox" 
+                icon={TabIcon}
+                activeBackgroundColor="#DDD"
+                navigationBarStyle={{ backgroundColor: 'green' }}
+                titleStyle={{ color: 'white', alignSelf: 'center' }}
+              >
+                <Scene key="yourMessages" title="Inbox" component={Inbox}/>
+              </Scene>
+              <Scene
+                key="profile" 
+                title="Profile" 
+                icon={TabIcon}
+                activeBackgroundColor="#DDD"
+                navigationBarStyle={{ backgroundColor: 'green' }}
+                titleStyle={{ color: 'white', alignSelf: 'center' }}
+              >
+                <Scene key="myProfile" title="Profile" component={Profile}/>
+              </Scene>
             </Scene>
-            <Scene
-              key="trips" 
-              title="Trips" 
-              icon={TabIcon}
-              activeBackgroundColor="#DDD"
-              navigationBarStyle={{ backgroundColor: 'green' }}
-              titleStyle={{ color: 'white', alignSelf: 'center' }}
-            >
-              <Scene key="yourTrips" title="Trips" component={Trips}/>
-            </Scene>
-            <Scene 
-              key="saved" 
-              title="Saved" 
-              icon={TabIcon}
-              activeBackgroundColor="#DDD"
-              navigationBarStyle={{ backgroundColor: 'green' }}
-              titleStyle={{ color: 'white', alignSelf: 'center' }}
-            >
-              <Scene key="yourSavedPlaces" title="Saved" component={Saved}/>
-            </Scene>
-            <Scene 
-              key="inbox" 
-              title="Inbox" 
-              icon={TabIcon}
-              activeBackgroundColor="#DDD"
-              navigationBarStyle={{ backgroundColor: 'green' }}
-              titleStyle={{ color: 'white', alignSelf: 'center' }}
-            >
-              <Scene key="yourMessages" title="Inbox" component={Inbox}/>
-            </Scene>
-            <Scene
-              key="profile" 
-              title="Profile" 
-              icon={TabIcon}
-              activeBackgroundColor="#DDD"
-              navigationBarStyle={{ backgroundColor: 'green' }}
-              titleStyle={{ color: 'white', alignSelf: 'center' }}
-            >
-              <Scene key="myProfile" title="Profile" component={Profile}/>
-            </Scene>
-          </Scene>
-        </Scene>  
-      </Router>
+          </Scene>  
+        </Router>
+      </Provider>
     )
   }
 }
