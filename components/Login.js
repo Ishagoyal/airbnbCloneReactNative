@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ScrollView, View, StyleSheet, Text, TextInput,TouchableHighlight } from 'react-native';
 import { login } from '../actions';
+import { bindActionCreators } from 'redux';
 
-export default class Login extends Component{
+class Login extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
@@ -53,8 +54,9 @@ export default class Login extends Component{
 		);
 	}
 
+
 	onPressLoginButton(){
-		this.props.onLoginAction(this.state.username, this.state.password)
+		this.props.login(this.state.username, this.state.password);
 	}
 }
 
@@ -66,9 +68,11 @@ const mapStateToProps = (state, ownProps ) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		onLoginAction:(username,password) => {dispatch(login(username,password));}
+		login:(username,password)=>{ dispatch(login(username, password));}
 	};
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
 
 const styles = StyleSheet.create({
   container: {

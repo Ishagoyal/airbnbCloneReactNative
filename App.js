@@ -30,7 +30,7 @@ export default class App extends Component{
       <Provider store={store}>
         <Router>
           <Scene key="root">
-            <Scene key="application" component={Application} title="Application" initial = {true} />
+            <Scene key="application" component={Application} title="Application" />
             <Scene key="property" component={Property} title="Property" />
             <Scene key="bookProperty" component={BookProperty} title="BookProperty" />
             <Scene key="guests" component={GuestNumber} title="GuestNumber" direction="vertical"/>
