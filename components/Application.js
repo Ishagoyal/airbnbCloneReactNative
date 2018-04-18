@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 import Login from './Login';
 import Home from './Home';
 

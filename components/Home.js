@@ -148,7 +148,7 @@ export default class Home extends Component{
   onPressResetAllButton(){
     this.setState({
       isSearchingCity:false,
-       searchCityName:'',
+      searchCityName:'',
     });
   }
 

@@ -4,17 +4,21 @@ import loginData from '../utils/userData.json';
 
 function login(username, password):Action{
 	if((loginData[0].username == username) && (loginData[0].password == password)){
-  	return (dispatch)=> {
-			type: actionType.LOGIN;
-			username: username;
-  		password: password;
+  	return {
+			type: actionType.LOGIN,
+			username: username,
+  		password: password,
 		}
-	}   
+	} 
+	else{
+		return "Username or Password is incorrect!"
+	}  
 }
 
+
 function logout(username, password):Action{
-	return (dispatch)=> {
-		type: actionType.LOGOUT;
+	return{
+		type: actionType.LOGOUT,
 	}
 }	
 

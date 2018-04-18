@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import { Provider } from 'react-redux';
-import {Router,Scene, Modal} from 'react-native-router-flux';
+import {Router,Scene} from 'react-native-router-flux';
 import {StyleSheet} from 'react-native';
 import store from './store/configureStore';
 import Home from './components/Home';
@@ -30,19 +30,6 @@ export default class App extends Component{
       <Provider store={store}>
         <Router>
           <Scene key="root">
-            <Scene key="application" component={Application} title="Application" />
-            <Scene key="property" component={Property} title="Property" />
-            <Scene key="bookProperty" component={BookProperty} title="BookProperty" />
-            <Scene key="guests" component={GuestNumber} title="GuestNumber" direction="vertical"/>
-            <Scene key="editProfile" component={EditProfile} title="EditProfile"/>
-            <Scene key="notifications" component={Notifications} title="Notifications"/>
-            <Scene key="creditsAndCoupons" component={CreditsAndCoupons} title="CreditsAndCoupons"/>
-            <Scene key="inviteFriends" component={InviteFriends} title="InviteFriends"/>
-            <Scene key="payments" component={Payments} title="Payments"/>
-            <Scene key="settings" component={Settings} title="Settings"/>
-            <Scene key="getHelp" component={GetHelp} title="GetHelp"/>
-            <Scene key="giveFeedback" component={GiveFeedback} title="GiveFeedback"/>
-            <Scene key="searchCity" component={SearchCity} title="SearchCity"/>
             <Scene  
               key="tabbar"
               tabs
@@ -51,7 +38,7 @@ export default class App extends Component{
               inactiveBackgroundColor='white'
               tabBarPosition={'bottom'}
               tabBarStyle={{backgroundColor:'orange'}}
-              //initial
+              initial
             >
               <Scene
                 key="explore" 
@@ -60,8 +47,12 @@ export default class App extends Component{
                 activeBackgroundColor="#DDD"
                 navigationBarStyle={{ backgroundColor: 'green' }}
                 titleStyle={{ color: 'white', alignSelf: 'center' }}
+                component={Home}
               >
-                <Scene key="homes" title="Explore" component={Home}/>
+                <Scene key="property" component={Property} title="Property" /> 
+                <Scene key="bookProperty" component={BookProperty} title="BookProperty" />
+                <Scene key="guests" component={GuestNumber} title="GuestNumber" direction="vertical"/>
+                <Scene key="searchCity" component={SearchCity} title="SearchCity"/>
               </Scene>
               <Scene
                 key="trips" 
@@ -70,8 +61,8 @@ export default class App extends Component{
                 activeBackgroundColor="#DDD"
                 navigationBarStyle={{ backgroundColor: 'green' }}
                 titleStyle={{ color: 'white', alignSelf: 'center' }}
+                component={Trips}
               >
-                <Scene key="yourTrips" title="Trips" component={Trips}/>
               </Scene>
               <Scene 
                 key="saved" 
@@ -80,8 +71,8 @@ export default class App extends Component{
                 activeBackgroundColor="#DDD"
                 navigationBarStyle={{ backgroundColor: 'green' }}
                 titleStyle={{ color: 'white', alignSelf: 'center' }}
+                component={Saved}
               >
-                <Scene key="yourSavedPlaces" title="Saved" component={Saved}/>
               </Scene>
               <Scene 
                 key="inbox" 
@@ -90,8 +81,8 @@ export default class App extends Component{
                 activeBackgroundColor="#DDD"
                 navigationBarStyle={{ backgroundColor: 'green' }}
                 titleStyle={{ color: 'white', alignSelf: 'center' }}
+                component={Inbox}
               >
-                <Scene key="yourMessages" title="Inbox" component={Inbox}/>
               </Scene>
               <Scene
                 key="profile" 
@@ -100,8 +91,16 @@ export default class App extends Component{
                 activeBackgroundColor="#DDD"
                 navigationBarStyle={{ backgroundColor: 'green' }}
                 titleStyle={{ color: 'white', alignSelf: 'center' }}
+                component={Profile}
               >
-                <Scene key="myProfile" title="Profile" component={Profile}/>
+                <Scene key="editProfile" component={EditProfile} title="EditProfile"/>
+                <Scene key="notifications" component={Notifications} title="Notifications"/>
+                <Scene key="creditsAndCoupons" component={CreditsAndCoupons} title="CreditsAndCoupons"/>
+                <Scene key="inviteFriends" component={InviteFriends} title="InviteFriends"/>
+                <Scene key="payments" component={Payments} title="Payments"/>
+                <Scene key="settings" component={Settings} title="Settings"/>
+                <Scene key="getHelp" component={GetHelp} title="GetHelp"/>
+                <Scene key="giveFeedback" component={GiveFeedback} title="GiveFeedback"/>
               </Scene>
             </Scene>
           </Scene>  
