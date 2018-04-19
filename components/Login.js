@@ -24,7 +24,8 @@ class Login extends Component{
 	renderLogin(){
 		return(
 			<ScrollView>
-				<Text style={styles.heading} >{'Login'}</Text>
+				<Text style={styles.heading}>{'Please login first!'}</Text>
+				<Text style={styles.loginHeading} >{'Login'}</Text>
 				<TextInput
 					style={styles.username}
 					underlineColorAndroid='rgba(0,0,0,0)'
@@ -62,7 +63,7 @@ class Login extends Component{
 
 const mapStateToProps = (state, ownProps ) => {
 	return {
-		isLoggedIn: state.authReducer.isLoggedIn
+		isLoggedIn: state.userReducer.isLoggedIn
 	};
 }
 
@@ -79,8 +80,14 @@ const styles = StyleSheet.create({
     flex:1,
     paddingTop: 30
   },
-  heading: {
+  loginHeading: {
     fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginTop:10 ,
+  },
+  heading:{
+  	fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
   },

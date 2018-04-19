@@ -2,12 +2,15 @@ import React, { Component } from 'react';
 import { View, Text, FlatList, StyleSheet, Image,TouchableHighlight, TextInput } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import propertyListData from '../utils/data.json';
+import { connect } from 'react-redux';
+import Login from './Login';
 
-var count=0;
+//var count=0;
 //var isPropertyExists = false;
-var objectLength = Object.keys(propertyListData).length;
+//var objectLength = Object.keys(propertyListData).length;
 
-export default class Home extends Component{
+
+class Home extends Component{
 
   constructor(props){
     super(props);
@@ -17,17 +20,23 @@ export default class Home extends Component{
       searchCityName:'',
       isPropertyExists:false
     }
+console.log(this.props.isLoggedIn);
 
-    this.ifPropertyExists = this.ifPropertyExists.bind(this);
+    //this.ifPropertyExists = this.ifPropertyExists.bind(this);
   }
 
   render(){
-    return (
-      <View style={{flex:1}}>
-        {this.renderSearchBar()}
-        {this.renderList()}
-      </View>
-    );
+    if (this.props.isLoggedIn){
+      return (
+        <View style={{flex:1}}>
+          {this.renderSearchBar()}
+          {this.renderList()}
+        </View>
+      );
+    }
+    else {
+      return <Login />; 
+    }  
   }
   
   renderList(){
@@ -55,37 +64,18 @@ export default class Home extends Component{
         </View>
       )
     }
-   /* return(
-      <View style={{flex:1}}>
-        {this.state.isSearchingCity ? (
-          <FlatList
-           data={propertyListData}
-           renderItem={({item}) => this.renderPropertyOnCityBasis(item)}
-           keyExtractor={(item, index) => item.id}
-           key="renderPropertyOfACity"
-          />
-        ) : (
-          <FlatList
-           data={propertyListData}
-           renderItem={({item}) => this.renderPropertyListRow(item)}
-           keyExtractor={(item, index) => item.id}
-           key="renderAllPropertyList"
-          />
-        )}  
-      </View>
-    );*/
   }
 
   onPressPropertyName(item){
-    Actions.property({propertyId: item.id});  
+    Actions.property({propertyId: 1});  
   }
 
-  ifPropertyExists(){
+ /* ifPropertyExists(){
     this.setState({
       isPropertyExists : true
     });
-  }  
-
+  }  */
+ 
   renderPropertyListRow(item){
     return(
       <View style={styles.container}>
@@ -99,11 +89,11 @@ export default class Home extends Component{
 
   
   renderPropertyOnCityBasis(item){
-    this.setState((prevState) => ({
+    /*this.setState((prevState) => ({
       itemCount: prevState.itemCount + 1,
-    }));
+    }));*/
     if(item.city == this.state.propertyCityName){
-      {this.ifPropertyExists()}
+      //{this.ifPropertyExists()}
       return(
         <View style={styles.container}>
           <Image source = {{uri:item.images.image1}} style={{width:400,height: 200,padding:5}} />
@@ -113,7 +103,8 @@ export default class Home extends Component{
         </View> 
       );
     }
-    else if ((itemCount == objectLength) && (isPropertyExists == false)){
+    else{
+    //else if ((itemCount == objectLength) && (isPropertyExists == false)){
       return(
         <View style={styles.container}>
           <Text style={styles.error}>{'No place found in this City!'}</Text>
@@ -159,6 +150,14 @@ export default class Home extends Component{
     });
   }
 }
+
+const mapStateToProps = (state, ownProps ) => {
+  return {
+    isLoggedIn: state.userReducer.isLoggedIn
+  };
+}
+
+export default connect(mapStateToProps)(Home);
 
 
 const styles = StyleSheet.create({

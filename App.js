@@ -19,9 +19,7 @@ import Payments from './components/Payments';
 import Settings from './components/Settings';
 import GetHelp from './components/GetHelp';
 import GiveFeedback from './components/GiveFeedback';
-import SearchCity from './components/SearchCity';
 import GuestNumber from './components/GuestNumber';
-import Application from './components/Application';
 
 
 export default class App extends Component{
@@ -30,6 +28,17 @@ export default class App extends Component{
       <Provider store={store}>
         <Router>
           <Scene key="root">
+            <Scene key="property" component={Property} title="Property" /> 
+            <Scene key="bookProperty" component={BookProperty} title="BookProperty" />
+            <Scene key="guests" component={GuestNumber} title="GuestNumber" direction="vertical"/>
+            <Scene key="editProfile" component={EditProfile} title="EditProfile"/>
+            <Scene key="notifications" component={Notifications} title="Notifications"/>
+            <Scene key="creditsAndCoupons" component={CreditsAndCoupons} title="CreditsAndCoupons"/>
+            <Scene key="inviteFriends" component={InviteFriends} title="InviteFriends"/>
+            <Scene key="payments" component={Payments} title="Payments"/>
+            <Scene key="settings" component={Settings} title="Settings"/>
+            <Scene key="getHelp" component={GetHelp} title="GetHelp"/>
+            <Scene key="giveFeedback" component={GiveFeedback} title="GiveFeedback"/>
             <Scene  
               key="tabbar"
               tabs
@@ -49,10 +58,6 @@ export default class App extends Component{
                 titleStyle={{ color: 'white', alignSelf: 'center' }}
                 component={Home}
               >
-                <Scene key="property" component={Property} title="Property" /> 
-                <Scene key="bookProperty" component={BookProperty} title="BookProperty" />
-                <Scene key="guests" component={GuestNumber} title="GuestNumber" direction="vertical"/>
-                <Scene key="searchCity" component={SearchCity} title="SearchCity"/>
               </Scene>
               <Scene
                 key="trips" 
@@ -93,14 +98,6 @@ export default class App extends Component{
                 titleStyle={{ color: 'white', alignSelf: 'center' }}
                 component={Profile}
               >
-                <Scene key="editProfile" component={EditProfile} title="EditProfile"/>
-                <Scene key="notifications" component={Notifications} title="Notifications"/>
-                <Scene key="creditsAndCoupons" component={CreditsAndCoupons} title="CreditsAndCoupons"/>
-                <Scene key="inviteFriends" component={InviteFriends} title="InviteFriends"/>
-                <Scene key="payments" component={Payments} title="Payments"/>
-                <Scene key="settings" component={Settings} title="Settings"/>
-                <Scene key="getHelp" component={GetHelp} title="GetHelp"/>
-                <Scene key="giveFeedback" component={GiveFeedback} title="GiveFeedback"/>
               </Scene>
             </Scene>
           </Scene>  
