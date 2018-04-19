@@ -20,7 +20,6 @@ class Home extends Component{
       searchCityName:'',
       isPropertyExists:false
     }
-console.log(this.props.isLoggedIn);
 
     //this.ifPropertyExists = this.ifPropertyExists.bind(this);
   }

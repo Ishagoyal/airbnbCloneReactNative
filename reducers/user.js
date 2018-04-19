@@ -7,7 +7,7 @@ const initialState = {
 	password:''
 };
 
-export default function authReducer (state = initialState, action){
+export default function userReducer (state = initialState, action){
 	switch (action.type) {
 		case actionType.LOGIN:
 			return Object.assign({},state,{

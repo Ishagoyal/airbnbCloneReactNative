@@ -24,7 +24,6 @@ class Login extends Component{
 	renderLogin(){
 		return(
 			<ScrollView>
-				<Text style={styles.heading}>{'Please login first!'}</Text>
 				<Text style={styles.loginHeading} >{'Login'}</Text>
 				<TextInput
 					style={styles.username}
@@ -57,6 +56,7 @@ class Login extends Component{
 
 
 	onPressLoginButton(){
+		console.log(this.state.username);
 		this.props.login(this.state.username, this.state.password);
 	}
 }
@@ -85,11 +85,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     marginTop:10 ,
-  },
-  heading:{
-  	fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
   },
   username:{
     height:50,

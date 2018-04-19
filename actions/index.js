@@ -3,6 +3,9 @@ import loginData from '../utils/userData.json';
 
 
 function login(username, password):Action{
+	console.log(username);
+	console.log(password);
+	console.log((loginData[0].username == username) && (loginData[0].password == password));
 	if((loginData[0].username == username) && (loginData[0].password == password)){
   	return {
 			type: actionType.LOGIN,
@@ -11,7 +14,7 @@ function login(username, password):Action{
 		}
 	} 
 	else{
-		return "Username or Password is incorrect!"
+		
 	}  
 }
 

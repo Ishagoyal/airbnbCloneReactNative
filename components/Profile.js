@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, ScrollView,TouchableHighlight} from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import Login from './Login';
-
 
 class Profile extends Component{
 
@@ -84,7 +82,13 @@ class Profile extends Component{
       )
     }
     else{
-      return <Login />; 
+      return(
+        <View>
+          <Text>{'You are not logged in'}</Text>
+          <Text>{'Please login to see your profile'}</Text>
+          <Text style={{color:'#00bfff',marginTop:10}} onPress={Actions.login}>{'Login'}</Text>
+        </View>
+      )
     }  
   }
 
