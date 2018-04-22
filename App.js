@@ -20,7 +20,6 @@ import Settings from './components/Settings';
 import GetHelp from './components/GetHelp';
 import GiveFeedback from './components/GiveFeedback';
 import GuestNumber from './components/GuestNumber';
-import Login from './components/Login';
 
 export default class App extends Component{
   render() {
@@ -39,7 +38,6 @@ export default class App extends Component{
             <Scene key="settings" component={Settings} title="Settings"/>
             <Scene key="getHelp" component={GetHelp} title="GetHelp"/>
             <Scene key="giveFeedback" component={GiveFeedback} title="GiveFeedback"/>
-            <Scene key="loginId" component={Login} title="Login"/>
             <Scene  
               key="tabbar"
               tabs

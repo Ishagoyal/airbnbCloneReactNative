@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, ScrollView,TouchableHighlight} from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
+import Login from './Login';
+import { logout } from '../actions';
 
 class Profile extends Component{
 
@@ -78,16 +80,18 @@ class Profile extends Component{
               <Image source={{uri: "https://www.prodpad.com/wp-content/uploads/2014/05/icon-comments1.png"}} style={{width:25,height:25,marginLeft:155}}/>
             </View>  
           </TouchableHighlight>
+          <TouchableHighlight
+          style = {styles.logout}
+          onPress={this.onPressLogoutButton.bind(this)}
+          >
+          <Text style={styles.logoutText}>{'Logout'}</Text>
+        </TouchableHighlight>
         </ScrollView>
       )
     }
     else{
       return(
-        <View>
-          <Text>{'You are not logged in'}</Text>
-          <Text>{'Please login to see your profile'}</Text>
-          <Text style={{color:'#00bfff',marginTop:10}} onPress={Actions.login}>{'Login'}</Text>
-        </View>
+       <Login />
       )
     }  
   }
@@ -123,6 +127,10 @@ class Profile extends Component{
   onPressGiveFeedback(){
     Actions.giveFeedback();
   }  
+
+  onPressLogoutButton(){
+    this.props.logout();
+  }
 }
 
 const mapStateToProps = (state, ownProps ) => {
@@ -131,7 +139,13 @@ const mapStateToProps = (state, ownProps ) => {
   };
 }
 
-export default connect(mapStateToProps)(Profile);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logout:() =>{ dispatch(logout());}
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);
 
 
 const styles = StyleSheet.create({
@@ -192,5 +206,22 @@ const styles = StyleSheet.create({
   buttonText:{
     fontWeight:'bold',
     fontSize:16,
-  }
+  },
+  logout:{
+    marginTop:30,
+    width:300,
+    margin:20,
+    borderWidth:1,
+    borderColor:'red',
+    padding:15,
+    alignItems:'center',
+    marginLeft:30,
+    marginRight:25,
+    backgroundColor:'red',
+    borderRadius:5,
+  },
+  logoutText:{
+    fontSize:18,
+    color:'white',
+  },
 })

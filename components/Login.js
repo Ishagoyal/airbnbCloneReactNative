@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ScrollView, View, StyleSheet, Text, TextInput,TouchableHighlight } from 'react-native';
 import { login } from '../actions';
-import { bindActionCreators } from 'redux';
 
 class Login extends Component{
 	constructor(props){
@@ -54,10 +53,9 @@ class Login extends Component{
 		);
 	}
 
-
 	onPressLoginButton(){
-		console.log(this.state.username);
 		this.props.login(this.state.username, this.state.password);
+		
 	}
 }
 
@@ -126,6 +124,5 @@ const styles = StyleSheet.create({
   loginText:{
     fontSize:18,
     color:'white',
-  },
-  
+  }, 
 })  

@@ -4,7 +4,7 @@ import * as actionType from '../actions/actionTypes';
 const initialState = {
 	isLoggedIn: false,
 	userName:'',
-	password:''
+	password:'',
 };
 
 export default function userReducer (state = initialState, action){
