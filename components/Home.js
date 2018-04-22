@@ -1,61 +1,98 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList, StyleSheet, Image,TouchableHighlight } from 'react-native';
+import { View, Text, FlatList, StyleSheet, Image,TouchableHighlight, TextInput } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import propertyListData from '../utils/data.json';
+import { connect } from 'react-redux';
+import Login from './Login';
 
-//var isSearchingCity = false;
-//var  isResetButtonNotPressed = true;
+//var count=0;
+//var isPropertyExists = false;
+//var objectLength = Object.keys(propertyListData).length;
 
-export default class Home extends Component{
+
+class Home extends Component{
 
   constructor(props){
     super(props);
     this.state = {
-      propertyCityName:this.props.cityNameObtained,
-      isSearchingCity:false 
+      propertyCityName:'',
+      isSearchingCity:false,
+      searchCityName:'',
+      isPropertyExists:false
     }
+
+    //this.ifPropertyExists = this.ifPropertyExists.bind(this);
   }
 
-	render() {
-    console.log(this.state.isSearchingCity);
-		return (
-			<View style={{flex:1}}>
-        {this.renderSearchBar()}
-        <TouchableHighlight style={styles.reset} onPress={this.onPressResetAllButton.bind(this)}>
-          <Text style={styles.resetText}>Reset All</Text>
-        </TouchableHighlight>
-        {this.state.isSearchingCity ? (
-				  <FlatList
-					 data={propertyListData}
-					 renderItem={({item}) => this.renderPropertyOnCityBasis(item)}
-				  />
-        ) : (
+  render(){
+    if (this.props.isLoggedIn){
+      return (
+        <View style={{flex:1}}>
+          {this.renderSearchBar()}
+          {this.renderList()}
+        </View>
+      );
+    }
+    else {
+      return <Login />; 
+    }  
+  }
+  
+  renderList(){
+    if(this.state.isSearchingCity){
+      return(
+        <View style={{flex:1}}>
+          <FlatList
+           data={propertyListData}
+           renderItem={({item}) => this.renderPropertyOnCityBasis(item)}
+           keyExtractor={(item, index) => item.id}
+           key="renderPropertyOfACity"
+          />
+        </View>
+      )
+    }
+    else if(!this.state.isSearchingCity){
+      return(
+        <View style={{flex:1}}>
           <FlatList
            data={propertyListData}
            renderItem={({item}) => this.renderPropertyListRow(item)}
+           keyExtractor={(item, index) => item.id}
+           key="renderAllPropertyList"
           />
-        )}  
-			</View>
-		);
-	}
+        </View>
+      )
+    }
+  }
 
-	onPressPropertyName(item){
-		Actions.property({propertyId: item.id});  
-	}   
+  onPressPropertyName(item){
+    Actions.property({propertyId: 1});  
+  }
 
-	renderPropertyListRow(item){
-		return(
-			<View style={styles.container}>
+ /* ifPropertyExists(){
+    this.setState({
+      isPropertyExists : true
+    });
+  }  */
+ 
+  renderPropertyListRow(item){
+    return(
+      <View style={styles.container}>
         <Image source = {{uri:item.images.image1}} style={{width:400,height: 200,padding:5}} />
-				<Text style={styles.name} onPress={this.onPressPropertyName.bind(this,item)}>{item.name} </Text>
-				<Text style={styles.item} >{item.price} </Text>
-				<Text style={styles.item} >{item.address} </Text>
-			</View> 
-		);   
-	}
+        <Text style={styles.name} onPress={this.onPressPropertyName.bind(this,item)}>{item.name} </Text>
+        <Text style={styles.item} >{item.price} </Text>
+        <Text style={styles.item} >{item.address} </Text>
+      </View> 
+    );   
+  }
 
+  
   renderPropertyOnCityBasis(item){
-    if(item.city==this.state.propertyCityName){
+    /*this.setState((prevState) => ({
+      itemCount: prevState.itemCount + 1,
+    }));*/
+    if(item.city == this.state.propertyCityName){
+      //{this.ifPropertyExists()}
       return(
         <View style={styles.container}>
           <Image source = {{uri:item.images.image1}} style={{width:400,height: 200,padding:5}} />
@@ -65,56 +102,76 @@ export default class Home extends Component{
         </View> 
       );
     }
+    else{
+    //else if ((itemCount == objectLength) && (isPropertyExists == false)){
+      return(
+        <View style={styles.container}>
+          <Text style={styles.error}>{'No place found in this City!'}</Text>
+        </View>
+      );
+    }  
   }
 
   renderSearchBar(){
-    return(
+    return( 
       <View>
-        <TouchableHighlight style={styles.search} onPress={this.onPressSearchCityButton.bind(this)}>
-          <View style={{flexDirection:'row', flexWrap:'wrap'}}>
-            <Image source={{uri: "http://www.pvhc.net/img2/lnuceeldknrdpozttbxm.png"}} style={{width:30,height:30}}/>
-            <Text style={styles.searchText}>{'Search City'}</Text>
-          </View>  
-        </TouchableHighlight>
+        <TextInput 
+          style={styles.city}
+          onChangeText={(text) => this.setState({searchCityName:text})}
+          underlineColorAndroid='rgba(0,0,0,0)'
+          placeholder="Where To?"
+          onSubmitEditing={this.onPressSearchButton}
+        >  
+        </TextInput>
+        <View style={{flexDirection:'row', flexWrap:'wrap'}}>
+          <TouchableHighlight style={styles.searchButton} onPress={()=>this.onPressSearchButton(this.state.searchCityName)}>
+            <Text style={styles.searchText}>{'Search'}</Text>
+          </TouchableHighlight>
+          <TouchableHighlight style={styles.reset} onPress={this.onPressResetAllButton.bind(this)}>
+            <Text style={styles.resetText}>Reset All</Text>
+          </TouchableHighlight>
+        </View>  
       </View>
-    )  
-  }
-
-  onPressSearchCityButton(){
-    this.setState({
-      isSearchingCity:true
-    });
-    //isSearchingCity=true;
-    Actions.searchCity();
+    );  
   }
 
   onPressResetAllButton(){
-   /* this.setState({
-      isResetButtonNotPressed:false
-    });*/
-
-    //isResetButtonNotPressed=false;
-    //isSearchingCity=false;
     this.setState({
-      isSearchingCity:false
+      isSearchingCity:false,
+      searchCityName:'',
+    });
+  }
+
+  onPressSearchButton(cityName){
+    this.setState({
+      isSearchingCity:true,
+      propertyCityName:cityName
     });
   }
 }
 
+const mapStateToProps = (state, ownProps ) => {
+  return {
+    isLoggedIn: state.userReducer.isLoggedIn
+  };
+}
+
+export default connect(mapStateToProps)(Home);
+
 
 const styles = StyleSheet.create({
-	container: {
+  container: {
     flexDirection:'row',
     flexWrap:'wrap',
     flex: 1,
     paddingTop: 10
-	},
-	item: {
-		padding: 5,
-		fontSize: 12,
-		height: 30,
+  },
+  item: {
+    padding: 5,
+    fontSize: 12,
+    height: 30,
     fontWeight:'bold',
-	},
+  },
   name:{
     fontSize:14,
     fontWeight:'bold',
@@ -122,36 +179,56 @@ const styles = StyleSheet.create({
     paddingTop:5,
     paddingLeft:5
   },
-  search:{
-    padding:10,
-    borderWidth:1,
-    margin:5,
-    marginTop:10,
-    borderColor:'#20b2aa',
-    backgroundColor:'#20b2aa',
-    borderRadius:5
-  },
-  searchText:{
-    color:'white',
-    fontWeight:'bold',
-    marginLeft:20,
-    fontSize:16,
-  },
   reset:{
     padding:10,
     borderWidth:1,
     margin:5,
-    marginLeft:275,
-    marginTop:10,
-    borderColor:'#4F94CD',
+    marginLeft:60,
+    marginTop:20,
+    marginBottom:20,
+    borderColor:'white',
     backgroundColor:'#4F94CD',
     borderRadius:5,
-    width:80
+    width:120,
+    alignItems:'center',
   },
   resetText:{
     color:'white',
     fontWeight:'bold',
-    fontSize:14,
-  }
+    fontSize:18,
+  },
+  city:{
+    height:50,
+    borderBottomWidth:1,
+    borderColor:'white',
+    padding:10,
+    margin:5,
+    marginTop:10,
+    color:'white',
+    fontWeight:'bold',
+    fontSize:18,
+    backgroundColor:'#20b2aa',
+  },
+  searchButton:{
+    borderWidth:1,
+    borderColor:'white',
+    padding:10,
+    margin:5,
+    marginTop:20,
+    marginBottom:20,
+    borderRadius:5,
+    marginLeft:30,
+    width:120,
+    alignItems:'center',
+    borderColor:'#4F94CD',
+    backgroundColor:'#4F94CD',
+  },
+  searchText:{
+    color:'white',
+    fontWeight:'bold',
+    fontSize:18,
+  },
+  error:{
 
+  }
 })

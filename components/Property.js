@@ -15,8 +15,9 @@ import { Actions } from 'react-native-router-flux';
 import Swiper from 'react-native-swiper';
 
 export default class Property extends Component{
-	constructor(props){
-		super(props);
+  
+  constructor(props){
+    super(props);
     this.state = {
       displayName: '',
       displayPrice: '',
@@ -30,8 +31,8 @@ export default class Property extends Component{
     this.openCalendarForCheckIn = this.openCalendarForCheckIn.bind(this);
     this.openCalendarForCheckOut = this.openCalendarForCheckOut.bind(this);
     this.displayConfirmButton = this.displayConfirmButton.bind(this);
-	}
-  
+  }
+
   componentDidMount(){
     this.setState({
       displayName: propertyDetailsData[0].name,
@@ -121,7 +122,7 @@ export default class Property extends Component{
         <View style={{paddingTop:10, paddingBottom:10}}>
           <Button
             title="Confirm"
-            onPress={()=>this.onPressConfirmButton(this.state.startDate,this.state.endDate)}
+            onPress={this.onPressConfirmButton.bind(this,this.state.startDate,this.state.endDate, this.state.displayPrice)}
           /> 
         </View> 
       )
@@ -129,8 +130,8 @@ export default class Property extends Component{
   }
 
 
-  onPressConfirmButton(startDateDisplay, endDateDisplay){
-    Actions.bookProperty({startDate: startDateDisplay,endDate:endDateDisplay}); 
+  onPressConfirmButton(startDateDisplay, endDateDisplay, priceDisplay){
+    Actions.bookProperty({startDate: startDateDisplay,endDate:endDateDisplay, displayPrice:priceDisplay}); 
   }
 
   async openCalendarForCheckIn(){
@@ -155,7 +156,7 @@ export default class Property extends Component{
     try {
       const {action, year, month, day} = await DatePickerAndroid.open({
       date: new Date(),
-      minDate:new Date()
+      minDate: new Date()
     });
     if (action !== DatePickerAndroid.dismissedAction) {
       // Selected year, month (0-11), day
@@ -199,6 +200,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginLeft:50,
     marginRight:50,
+    padding:5,
     alignItems:'center',
   },  
 })

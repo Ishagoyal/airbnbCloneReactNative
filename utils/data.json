@@ -51,5 +51,17 @@
     "images" : {
       "image1": "https://a0.muscache.com/im/pictures/e919a9b2-3766-4eec-abc7-73e93865e94b.jpg"
     }
+  },
+
+  {
+    "id": "6",
+    "name": "Independent Studio Apt-Bandra-No3-Carter rd-Mumbai",
+    "price" : "$25",
+    "address":"Mumbai, MH, India",
+    "city":"Mumbai",
+    "images" : {
+      "image1": "https://a0.muscache.com/im/pictures/e919a9b2-3766-4eec-abc7-73e93865e94b.jpg"
+    }
   }
+
 ]
