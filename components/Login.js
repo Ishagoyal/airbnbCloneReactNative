@@ -16,6 +16,7 @@ class Login extends Component{
 		return(
 			<View style={styles.container}>
         {this.renderLogin()}
+        {this.renderIfIncorrectCredentials()}
       </View>
 		);
 	}
@@ -53,6 +54,16 @@ class Login extends Component{
 		);
 	}
 
+	renderIfIncorrectCredentials(){
+		if(this.props.isIncorrectCredentials){
+			return(
+				<View style={styles.container}>
+					<Text style ={styles.incorrectCredentials}>{"Username or Password is incorrect!"}</Text>
+				</View>
+			)
+		}
+	}
+
 	onPressLoginButton(){
 		this.props.login(this.state.username, this.state.password);
 		
@@ -61,7 +72,8 @@ class Login extends Component{
 
 const mapStateToProps = (state, ownProps ) => {
 	return {
-		isLoggedIn: state.userReducer.isLoggedIn
+		isLoggedIn: state.userReducer.isLoggedIn,
+		isIncorrectCredentials: state.userReducer.isIncorrectCredentials,
 	};
 }
 
@@ -111,7 +123,7 @@ const styles = StyleSheet.create({
   login:{
     marginTop:30,
     width:300,
-    margin:20,
+    margin:10,
     borderWidth:1,
     borderColor:'red',
     padding:15,
@@ -125,4 +137,9 @@ const styles = StyleSheet.create({
     fontSize:18,
     color:'white',
   }, 
+  incorrectCredentials:{
+  	fontSize:18,
+  	marginLeft:30,
+  	marginTop:5
+  }
 })  
