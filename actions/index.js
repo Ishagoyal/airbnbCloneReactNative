@@ -25,8 +25,16 @@ function logout():Action{
 	}
 }	
 
+function editProfile(firstName,lastName):Action{
+	return {
+		type:actionType.EDIT_PROFILE,
+		firstName: firstName,
+		lastName: lastName,
+	}
+}
 
-module.exports = {login,logout};
+
+module.exports = {login,logout, editProfile};
 
 
 /*export const signup = (userName, password) => ({

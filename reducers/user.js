@@ -3,9 +3,11 @@ import * as actionType from '../actions/actionTypes';
 
 const initialState = {
 	isLoggedIn: false,
-	userName:'',
+	username:'',
 	password:'',
-	isIncorrectCredentials: false
+	isIncorrectCredentials: false,
+  firstName: '',
+  lastName: '',
 };
 
 export default function userReducer (state = initialState, action){
@@ -13,22 +15,27 @@ export default function userReducer (state = initialState, action){
 		case actionType.LOGIN_SUCCESS:
 			return Object.assign({},state,{
 				isLoggedIn: true,
-				userName:action.userName,
+				username:action.username,
 				password:action.password,
 			});
 		case actionType.LOGIN_FAILURE:
 			return Object.assign({},state,{
 				isLoggedIn: false,
-				userName:'',
+				username:'',
 				password:'',
 				isIncorrectCredentials: true 
 			});	
 		case actionType.LOGOUT:
 			return Object.assign({},state,{
 				isLoggedIn: false,
-				userName:'',
+				username:'',
 				password:''
-			})	
+			});
+		case actionType.EDIT_PROFILE:
+			return Object.assign({},state,{
+				firstName: action.firstName,
+				lastName: action.lastName,
+			});		
 		default:
 			return state;	
 	}
