@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { ScrollView, View, StyleSheet, Text, TextInput,TouchableHighlight } from 'react-native';
+import { ScrollView, View, StyleSheet, Text, TextInput,TouchableOpacity } from 'react-native';
 import { login } from '../actions';
 
 class Login extends Component{
@@ -16,13 +16,16 @@ class Login extends Component{
 		return(
 			<View style={styles.container}>
         {this.renderLogin()}
+        {this.renderIfIncorrectCredentials()}
       </View>
 		);
 	}
 
 	renderLogin(){
 		return(
-			<ScrollView>
+			<ScrollView
+				keyboardShouldPersistTaps="always"
+			>
 				<Text style={styles.loginHeading} >{'Login'}</Text>
 				<TextInput
 					style={styles.username}
@@ -43,25 +46,35 @@ class Login extends Component{
           onChangeText={(text) => this.setState({password:text})}
 				>	
 				</TextInput>
-				<TouchableHighlight
+				<TouchableOpacity
 					style = {styles.login}
-					onPress={this.onPressLoginButton.bind(this)}
+					onPress= {this.onPressLoginButton.bind(this)}
 				>
 					<Text style={styles.loginText}>{'Login'}</Text>
-				</TouchableHighlight>
+				</TouchableOpacity>
 			</ScrollView>
 		);
 	}
 
+	renderIfIncorrectCredentials(){
+		if(this.props.isIncorrectCredentials){
+			return(
+				<View style={styles.container}>
+					<Text style ={styles.incorrectCredentials}>{"Username or Password is incorrect!"}</Text>
+				</View>
+			)
+		}
+	}
+
 	onPressLoginButton(){
 		this.props.login(this.state.username, this.state.password);
-		
 	}
 }
 
 const mapStateToProps = (state, ownProps ) => {
 	return {
-		isLoggedIn: state.userReducer.isLoggedIn
+		isLoggedIn: state.userReducer.isLoggedIn,
+		isIncorrectCredentials: state.userReducer.isIncorrectCredentials,
 	};
 }
 
@@ -111,7 +124,7 @@ const styles = StyleSheet.create({
   login:{
     marginTop:30,
     width:300,
-    margin:20,
+    margin:10,
     borderWidth:1,
     borderColor:'red',
     padding:15,
@@ -125,4 +138,9 @@ const styles = StyleSheet.create({
     fontSize:18,
     color:'white',
   }, 
+  incorrectCredentials:{
+  	fontSize:18,
+  	marginLeft:30,
+  	marginTop:5
+  }
 })  

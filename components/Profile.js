@@ -11,14 +11,13 @@ class Profile extends Component{
     super(props);
     this.state = {
       displayProfileName:'',
-      displayPrrofilePic:'',
+      displayProfilePic:'',
     }
   }
 
   componentDidMount(){
     this.setState({
-      displayProfileName:'Isha',
-      displayPrrofilePic: 'https://uzateka.com/images/profil.png',
+      displayProfilePic: 'https://uzateka.com/images/profil.png',
     });
   }
   
@@ -27,11 +26,10 @@ class Profile extends Component{
       return(
         <ScrollView style={styles.container}>
           <Text style={styles.heading}>{'My Profile'}</Text>
-          <View style={styles.image}>
-            <Text style={styles.name}>{this.state.displayProfileName}</Text>
-            <Image source={{uri:this.state.displayPrrofilePic}} style={styles.profilePic}/>
-          </View>
-          <Text style={styles.editProfile} onPress={this.onPressEditProfile.bind(this)}>{'View and Edit Profile'}</Text>
+          <Text style={styles.email}>{this.props.username}</Text>
+          <Text style={styles.name}>{this.props.firstName} {this.props.lastName}</Text>
+          <Image source={{uri:this.state.displayProfilePic}} style={{width:40,height:40,marginLeft:290}}/>
+          <Text style={styles.editProfile} onPress={this.onPressEditProfile.bind(this)}>{'Edit Profile'}</Text>
           <TouchableHighlight onPress={this.onPressNotifications} style={styles.button}>
             <View style={{flexDirection:'row', flexWrap:'wrap'}}>
               <Text style={styles.buttonText}>Notifications</Text>
@@ -135,7 +133,10 @@ class Profile extends Component{
 
 const mapStateToProps = (state, ownProps ) => {
   return {
-    isLoggedIn: state.userReducer.isLoggedIn
+    isLoggedIn: state.userReducer.isLoggedIn,
+    firstName: state.userReducer.firstName,
+    lastName: state.userReducer.lastName,
+    username: state.userReducer.username,
   };
 }
 
@@ -166,21 +167,24 @@ const styles = StyleSheet.create({
     paddingBottom:10
   },
   name:{
-    fontSize:28,
+    fontSize:18,
     fontWeight:'bold',
     marginLeft:20,
     marginRight:100,
-
+    marginBottom:10,
   },
-  profilePic:{
-    height: 60,
-    width:60,
-    marginLeft:100,
+  email:{
+    fontSize:18,
+    fontWeight:'bold',
+    marginLeft:20,
+    marginRight:100,
+    marginTop:20,
   },
   editProfile:{
-    fontSize:18,
+    fontSize:16,
     marginLeft:20,
     fontWeight:'bold',
+    color:'blue'
   },
   image:{
     flexDirection:'row', 
@@ -197,7 +201,7 @@ const styles = StyleSheet.create({
   giveFeedbackButton:{
     borderTopWidth: 1,
     borderBottomWidth:1,
-    padding: 10,
+    padding: 15,
     borderColor: 'grey',
     marginTop:20,
     marginLeft:10,
@@ -206,6 +210,7 @@ const styles = StyleSheet.create({
   buttonText:{
     fontWeight:'bold',
     fontSize:16,
+    color:'blue'
   },
   logout:{
     marginTop:30,
