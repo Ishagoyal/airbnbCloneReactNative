@@ -24,7 +24,7 @@ class Login extends Component{
 	renderLogin(){
 		return(
 			<ScrollView
-				keyboardShouldPersistTaps={true}
+				keyboardShouldPersistTaps="always"
 			>
 				<Text style={styles.loginHeading} >{'Login'}</Text>
 				<TextInput
