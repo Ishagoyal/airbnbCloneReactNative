@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { ScrollView, View, StyleSheet, Text, TextInput,TouchableHighlight } from 'react-native';
+import { ScrollView, View, StyleSheet, Text, TextInput,TouchableOpacity } from 'react-native';
 import { login } from '../actions';
 
 class Login extends Component{
@@ -23,7 +23,9 @@ class Login extends Component{
 
 	renderLogin(){
 		return(
-			<ScrollView>
+			<ScrollView
+				keyboardShouldPersistTaps={true}
+			>
 				<Text style={styles.loginHeading} >{'Login'}</Text>
 				<TextInput
 					style={styles.username}
@@ -44,12 +46,12 @@ class Login extends Component{
           onChangeText={(text) => this.setState({password:text})}
 				>	
 				</TextInput>
-				<TouchableHighlight
+				<TouchableOpacity
 					style = {styles.login}
-					onPress={this.onPressLoginButton.bind(this)}
+					onPress= {this.onPressLoginButton.bind(this)}
 				>
 					<Text style={styles.loginText}>{'Login'}</Text>
-				</TouchableHighlight>
+				</TouchableOpacity>
 			</ScrollView>
 		);
 	}
@@ -66,7 +68,6 @@ class Login extends Component{
 
 	onPressLoginButton(){
 		this.props.login(this.state.username, this.state.password);
-		
 	}
 }
 
