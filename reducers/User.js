@@ -10,6 +10,7 @@ const initialState = {
   lastName: '',
 };
 
+
 export default function userReducer (state = initialState, action){
   switch (action.type) {
     case actionType.LOGIN_SUCCESS:
@@ -40,3 +41,4 @@ export default function userReducer (state = initialState, action){
       return state; 
   }
 }
+

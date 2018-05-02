@@ -30,7 +30,7 @@ class Login extends Component{
         <TextInput
           style={styles.userName}
           underlineColorAndroid='rgba(0,0,0,0)'
-          placeholder="userName"
+          placeholder="Username"
           autoFocus={true} 
           keyboardType='email-address'
           value={this.state.userName}
@@ -60,7 +60,7 @@ class Login extends Component{
     if(this.props.isIncorrectCredentials){
       return(
         <View style={styles.container}>
-          <Text style ={styles.incorrectCredentials}>{"userName or Password is incorrect!"}</Text>
+          <Text style ={styles.incorrectCredentials}>{"Username or Password is incorrect!"}</Text>
         </View>
       )
     }
