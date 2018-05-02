@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, FlatList, StyleSheet, Image,TouchableHighlight, TextInput } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import propertyListData from '../utils/data.json';
+import propertyListData from '../utils/Data.json';
 import { connect } from 'react-redux';
 import Login from '../components/Login';
 

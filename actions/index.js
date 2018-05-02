@@ -1,19 +1,19 @@
-import * as actionType from './actionTypes';
-import loginData from '../utils/userData.json';
+import * as actionType from './ActionTypes';
+import loginData from '../utils/UserData.json';
 
 
-function login(username, password):Action{
-  if((loginData[0].username == username) && (loginData[0].password == password)){
+function login(userName, password):Action{
+  if((loginData[0].userName == userName) && (loginData[0].password == password)){
     return {
       type: actionType.LOGIN_SUCCESS,
-      username: username,
+      userName: userName,
       password: password,
     }
   } 
   else{
     return{
       type:actionType.LOGIN_FAILURE,
-      username: '',
+      userName: '',
       password: '',
     }
   }  

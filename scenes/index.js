@@ -4,8 +4,8 @@ import {Router,Scene} from 'react-native-router-flux';
 import {StyleSheet} from 'react-native';
 import { PersistGate } from 'redux-persist/integration/react'
 
-import {store} from '../store/configureStore';
-import {persistor} from '../store/configureStore';
+import {store} from '../store/ConfigureStore';
+import {persistor} from '../store/ConfigureStore';
 import Home from '../scenes/Home';
 import Property from '../scenes/Property';
 import BookProperty from '../scenes/BookProperty';

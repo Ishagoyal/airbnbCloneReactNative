@@ -4,84 +4,84 @@ import { ScrollView, View, StyleSheet, Text, TextInput,TouchableOpacity } from '
 import { login } from '../actions';
 
 class Login extends Component{
-	constructor(props){
-		super(props);
-		this.state = {
-			username:'',
-			password:''
-		};
-	}
+  constructor(props){
+    super(props);
+    this.state = {
+      userName:'',
+      password:''
+    };
+  }
 
-	render(){
-		return(
-			<View style={styles.container}>
+  render(){
+    return(
+      <View style={styles.container}>
         {this.renderLogin()}
         {this.renderIfIncorrectCredentials()}
       </View>
-		);
-	}
+    );
+  }
 
-	renderLogin(){
-		return(
-			<ScrollView
-				keyboardShouldPersistTaps="always"
-			>
-				<Text style={styles.loginHeading} >{'Login'}</Text>
-				<TextInput
-					style={styles.username}
-					underlineColorAndroid='rgba(0,0,0,0)'
-          placeholder="Username"
+  renderLogin(){
+    return(
+      <ScrollView
+        keyboardShouldPersistTaps="always"
+      >
+        <Text style={styles.loginHeading} >{'Login'}</Text>
+        <TextInput
+          style={styles.userName}
+          underlineColorAndroid='rgba(0,0,0,0)'
+          placeholder="userName"
           autoFocus={true} 
           keyboardType='email-address'
-          value={this.state.username}
-          onChangeText={(text) => this.setState({username:text})}
-				>	
-				</TextInput>
-				<TextInput
-					style={styles.password}
-					underlineColorAndroid='rgba(0,0,0,0)'
+          value={this.state.userName}
+          onChangeText={(text) => this.setState({userName:text})}
+        > 
+        </TextInput>
+        <TextInput
+          style={styles.password}
+          underlineColorAndroid='rgba(0,0,0,0)'
           placeholder="Password"
           secureTextEntry={true} 
           value={this.state.password}
           onChangeText={(text) => this.setState({password:text})}
-				>	
-				</TextInput>
-				<TouchableOpacity
-					style = {styles.login}
-					onPress= {this.onPressLoginButton.bind(this)}
-				>
-					<Text style={styles.loginText}>{'Login'}</Text>
-				</TouchableOpacity>
-			</ScrollView>
-		);
-	}
+        > 
+        </TextInput>
+        <TouchableOpacity
+          style = {styles.login}
+          onPress= {this.onPressLoginButton.bind(this)}
+        >
+          <Text style={styles.loginText}>{'Login'}</Text>
+        </TouchableOpacity>
+      </ScrollView>
+    );
+  }
 
-	renderIfIncorrectCredentials(){
-		if(this.props.isIncorrectCredentials){
-			return(
-				<View style={styles.container}>
-					<Text style ={styles.incorrectCredentials}>{"Username or Password is incorrect!"}</Text>
-				</View>
-			)
-		}
-	}
+  renderIfIncorrectCredentials(){
+    if(this.props.isIncorrectCredentials){
+      return(
+        <View style={styles.container}>
+          <Text style ={styles.incorrectCredentials}>{"userName or Password is incorrect!"}</Text>
+        </View>
+      )
+    }
+  }
 
-	onPressLoginButton(){
-		this.props.login(this.state.username, this.state.password);
-	}
+  onPressLoginButton(){
+    this.props.login(this.state.userName, this.state.password);
+  }
 }
 
 const mapStateToProps = (state, ownProps ) => {
-	return {
-		isLoggedIn: state.userReducer.isLoggedIn,
-		isIncorrectCredentials: state.userReducer.isIncorrectCredentials,
-	};
+  return {
+    isLoggedIn: state.userReducer.isLoggedIn,
+    isIncorrectCredentials: state.userReducer.isIncorrectCredentials,
+  };
 }
 
 const mapDispatchToProps = (dispatch) => {
-	return {
-		login:(username,password)=>{ dispatch(login(username, password));}
-	};
+  return {
+    login:(userName,password)=>{ dispatch(login(userName, password));}
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop:10 ,
   },
-  username:{
+  userName:{
     height:50,
     borderBottomWidth:1,
     borderColor:'white',
@@ -139,8 +139,8 @@ const styles = StyleSheet.create({
     color:'white',
   }, 
   incorrectCredentials:{
-  	fontSize:18,
-  	marginLeft:30,
-  	marginTop:5
+    fontSize:18,
+    marginLeft:30,
+    marginTop:5
   }
 })  

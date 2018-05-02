@@ -26,7 +26,7 @@ class Profile extends Component{
       return(
         <ScrollView style={styles.container}>
           <Text style={styles.heading}>{'My Profile'}</Text>
-          <Text style={styles.email}>{this.props.username}</Text>
+          <Text style={styles.email}>{this.props.userName}</Text>
           <Text style={styles.name}>{this.props.firstName} {this.props.lastName}</Text>
           <Image source={{uri:this.state.displayProfilePic}} style={{width:40,height:40,marginLeft:290}}/>
           <Text style={styles.editProfile} onPress={this.onPressEditProfile.bind(this)}>{'Edit Profile'}</Text>
@@ -136,7 +136,7 @@ const mapStateToProps = (state, ownProps ) => {
     isLoggedIn: state.userReducer.isLoggedIn,
     firstName: state.userReducer.firstName,
     lastName: state.userReducer.lastName,
-    username: state.userReducer.username,
+    userName: state.userReducer.userName,
   };
 }
 
