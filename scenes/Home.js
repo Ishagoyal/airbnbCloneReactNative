@@ -3,7 +3,7 @@ import { View, Text, FlatList, StyleSheet, Image,TouchableHighlight, TextInput }
 import { Actions } from 'react-native-router-flux';
 import propertyListData from '../utils/data.json';
 import { connect } from 'react-redux';
-import Login from './Login';
+import Login from '../components/Login';
 
 //var count=0;
 //var isPropertyExists = false;

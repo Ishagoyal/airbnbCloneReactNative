@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, ScrollView,TouchableHighlight} from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import Login from './Login';
+import Login from '../components/Login';
 import { logout } from '../actions';
 
 class Profile extends Component{

@@ -1,33 +1,26 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
-import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
-import Login from './Login';
+import { connect } from 'react-redux';
+import Login from '../components/Login';
 
-class Trips extends Component{
-
-  constructor(props){
-    super(props);
-  }
-  
+class Inbox extends Component{
   render(){
     if (this.props.isLoggedIn){ 
       return(
         <View>
-          <Text>{'You have not done any trips yet'}</Text>
+          <Text>{'No messgaes yet!'}</Text>
           <Text style={{color:'#00bfff'}} onPress={Actions.explore}>{'Start Exploring'}</Text>
         </View>
       )
-    }
+    }  
     else{
       return(
-        <Login/>
+        <Login />
       )
     }  
   }
 }
-
-
 
 const mapStateToProps = (state, ownProps ) => {
   return {
@@ -35,4 +28,4 @@ const mapStateToProps = (state, ownProps ) => {
   };
 }
 
-export default connect(mapStateToProps)(Trips);
+export default connect(mapStateToProps)(Inbox);

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import Login from './Login';
+import { connect } from 'react-redux';
+import Login from '../components/Login';
 
-export default class Saved extends Component{
+class Saved extends Component{
   
   render(){
     if (this.props.isLoggedIn){   
@@ -21,3 +22,11 @@ export default class Saved extends Component{
     }    
   }
 }
+
+const mapStateToProps = (state, ownProps ) => {
+  return {
+    isLoggedIn: state.userReducer.isLoggedIn
+  };
+}
+
+export default connect(mapStateToProps)(Saved);
