@@ -2,12 +2,14 @@ import * as actionType from './ActionTypes';
 import loginData from '../utils/UserData.json';
 
 
-function login(userName, password):Action{
-  if((loginData[0].userName == userName) && (loginData[0].password == password)){
+function login(userData):Action{
+  //console.log(userData);
+  //console.log(userData.userName);
+  if((loginData[0].userName == userData.userName) && (loginData[0].password == userData.password)){
     return {
       type: actionType.LOGIN_SUCCESS,
-      userName: userName,
-      password: password,
+      userName: userData.userName,
+      password: userData.password,
     }
   } 
   else{
@@ -25,11 +27,13 @@ function logout():Action{
   }
 } 
 
-function editProfile(firstName,lastName):Action{
+function editProfile(userData):Action{
+  //console.log(userData);
+  //console.log(userData.firstName);
   return {
     type:actionType.EDIT_PROFILE,
-    firstName: firstName,
-    lastName: lastName,
+    firstName: userData.firstName,
+    lastName: userData.lastName,
   }
 }
 

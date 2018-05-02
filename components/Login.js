@@ -67,6 +67,7 @@ class Login extends Component{
   }
 
   onPressLoginButton(){
+    //console.log(this.state.userName);
     this.props.login(this.state.userName, this.state.password);
   }
 }
@@ -80,7 +81,7 @@ const mapStateToProps = (state, ownProps ) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    login:(userName,password)=>{ dispatch(login(userName, password));}
+    login:(userName,password)=>{ dispatch(login({userName:userName, password:password}));}
   };
 }
 

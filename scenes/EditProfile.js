@@ -57,6 +57,7 @@ class EditProfile extends Component{
   }
 
   onPressSaveButton(){
+    //console.log(this.state.firstName);
     this.props.editProfile(this.state.firstName, this.state.lastName);
     Actions.pop();
   }
@@ -71,7 +72,7 @@ const mapStateToProps = (state, ownProps ) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    editProfile:(firstName,lastName)=>{ dispatch(editProfile(firstName, lastName));}
+    editProfile:(firstName,lastName)=>{ dispatch(editProfile({firstName:firstName, lastName:lastName}));}
   };
 }
 
