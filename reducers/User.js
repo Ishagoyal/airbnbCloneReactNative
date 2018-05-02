@@ -1,4 +1,6 @@
 import * as actionType from '../actions/ActionTypes';
+import storage from 'redux-persist/lib/storage';
+import { persistReducer } from 'redux-persist';
 
 
 const initialState = {
@@ -11,7 +13,7 @@ const initialState = {
 };
 
 
-export default function userReducer (state = initialState, action){
+const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionType.LOGIN_SUCCESS:
       return Object.assign({},state,{
@@ -40,5 +42,15 @@ export default function userReducer (state = initialState, action){
     default:
       return state; 
   }
-}
+};
+
+const persistConfig = {
+  key: 'user',
+  storage: storage,
+  blacklist: ['isIncorrectCredentials']
+};
+
+
+
+export default persistReducer(persistConfig, userReducer);
 
