@@ -7,13 +7,12 @@ const initialState = {
   isLoggedIn: false,
   userName:'',
   password:'',
-  isIncorrectCredentials: false,
   firstName: '',
   lastName: '',
 };
 
 
-const userReducer = (state = initialState, action) => {
+export default function userReducer(state = initialState, action){
   switch (action.type) {
     case actionType.LOGIN_SUCCESS:
       return Object.assign({},state,{
@@ -26,7 +25,6 @@ const userReducer = (state = initialState, action) => {
         isLoggedIn: false,
         userName:'',
         password:'',
-        isIncorrectCredentials: true 
       }); 
     case actionType.LOGOUT:
       return Object.assign({},state,{
@@ -44,13 +42,4 @@ const userReducer = (state = initialState, action) => {
   }
 };
 
-const persistConfig = {
-  key: 'user',
-  storage: storage,
-  blacklist: ['isIncorrectCredentials']
-};
-
-
-
-export default persistReducer(persistConfig, userReducer);
 

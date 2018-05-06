@@ -8,7 +8,7 @@ class Login extends Component{
     super(props);
     this.state = {
       userName:'',
-      password:''
+      password:'',
     };
   }
 
@@ -16,7 +16,6 @@ class Login extends Component{
     return(
       <View style={styles.container}>
         {this.renderLogin()}
-        {this.renderIfIncorrectCredentials()}
       </View>
     );
   }
@@ -56,32 +55,25 @@ class Login extends Component{
     );
   }
 
-  renderIfIncorrectCredentials(){
-    if(this.props.isIncorrectCredentials){
-      return(
-        <View style={styles.container}>
-          <Text style ={styles.incorrectCredentials}>{"Username or Password is incorrect!"}</Text>
-        </View>
-      )
-    }
+  loginCallbackFunction(){
+    alert("Wrong username or password");
   }
 
   onPressLoginButton(){
     //console.log(this.state.userName);
-    this.props.login(this.state.userName, this.state.password);
+    this.props.login(this.state.userName, this.state.password,this.loginCallbackFunction());
   }
 }
 
 const mapStateToProps = (state, ownProps ) => {
   return {
     isLoggedIn: state.userReducer.isLoggedIn,
-    isIncorrectCredentials: state.userReducer.isIncorrectCredentials,
   };
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    login:(userName,password)=>{ dispatch(login({userName:userName, password:password}));}
+    login:(userName,password,callbackFunction)=>{ dispatch(login({userName:userName, password:password},callbackFunction));}
   };
 }
 

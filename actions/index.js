@@ -2,10 +2,10 @@ import * as actionType from './ActionTypes';
 import loginData from '../utils/UserData.json';
 
 
-function login(userData):Action{
+function login(userData, errorCallback):Action{
   //console.log(userData);
   //console.log(userData.userName);
-  if((loginData[0].userName == userData.userName) && (loginData[0].password == userData.password)){
+  /*if((loginData[0].userName == userData.userName) && (loginData[0].password == userData.password)){
     return {
       type: actionType.LOGIN_SUCCESS,
       userName: userData.userName,
@@ -13,12 +13,27 @@ function login(userData):Action{
     }
   } 
   else{
-    return{
-      type:actionType.LOGIN_FAILURE,
-      userName: '',
-      password: '',
+    return (dispatch)=>{ 
+      type: actionType.LOGIN_FAILURE,
+      alert("Wrong username and password");
+    }  
+  }  */
+  //console.log(errorCallback());
+  return(dispatch)=>{
+    if((loginData[0].userName == userData.userName) && (loginData[0].password == userData.password)){
+      return{
+        type: actionType.LOGIN_SUCCESS,
+        userName: userData.userName,
+        password: userData.password,
+      }
     }
-  }  
+    else{
+      return(dispatch)=>{
+        type:  actionType.LOGIN_FAILURE,
+        errorCallback();
+      }
+    }
+  }
 }
 
 function logout():Action{
