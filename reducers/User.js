@@ -2,7 +2,6 @@ import * as actionType from '../actions/ActionTypes';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer } from 'redux-persist';
 
-
 const initialState = {
   isLoggedIn: false,
   userName:'',
@@ -10,7 +9,6 @@ const initialState = {
   firstName: '',
   lastName: '',
 };
-
 
 export default function userReducer(state = initialState, action){
   switch (action.type) {

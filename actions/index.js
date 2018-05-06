@@ -38,8 +38,3 @@ function editProfile(userData):Action{
 
 
 module.exports = {login,logout, editProfile};
-
-
-/*export const signup = (userName, password) => ({
-  type: actionType.SIGNUP,
-});*/

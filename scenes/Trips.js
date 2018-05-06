@@ -28,7 +28,6 @@ class Trips extends Component{
 }
 
 
-
 const mapStateToProps = (state, ownProps ) => {
   return {
     isLoggedIn: state.userReducer.isLoggedIn

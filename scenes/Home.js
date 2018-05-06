@@ -9,7 +9,6 @@ import Login from '../components/Login';
 //var isPropertyExists = false;
 //var objectLength = Object.keys(propertyListData).length;
 
-
 class Home extends Component{
 
   constructor(props){
@@ -69,7 +68,7 @@ class Home extends Component{
     Actions.property({propertyId: 1});  
   }
 
- /* ifPropertyExists(){
+  /*ifPropertyExists(){
     this.setState({
       isPropertyExists : true
     });
@@ -85,8 +84,7 @@ class Home extends Component{
       </View> 
     );   
   }
-
-  
+ 
   renderPropertyOnCityBasis(item){
     /*this.setState((prevState) => ({
       itemCount: prevState.itemCount + 1,
