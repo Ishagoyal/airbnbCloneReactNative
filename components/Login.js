@@ -9,6 +9,7 @@ class Login extends Component{
     this.state = {
       userName:'',
       password:'',
+      isIncorrectCredentials:false,
     };
   }
 
@@ -16,6 +17,7 @@ class Login extends Component{
     return(
       <View style={styles.container}>
         {this.renderLogin()}
+        {this.renderIfIncorrectCredentials()}
       </View>
     );
   }
@@ -55,8 +57,20 @@ class Login extends Component{
     );
   }
 
+  renderIfIncorrectCredentials(){
+    if(this.state.isIncorrectCredentials){
+      return(
+        <View style={styles.container}>
+          <Text style ={styles.incorrectCredentials}>{"Username or Password is incorrect!"}</Text>
+        </View>
+      )
+    }
+  }  
+
   loginCallbackFunction(){
-    alert("Wrong username or password");
+    this.setState({
+      isIncorrectCredentials:true
+    })
   }
 
   onPressLoginButton(){
