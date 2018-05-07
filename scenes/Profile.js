@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Image, ScrollView,TouchableHighlight} from 'rea
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import Login from '../components/Login';
-import { logout } from '../actions';
+import { logout } from '../actions/UserActions';
 
 class Profile extends Component{
 
@@ -134,8 +134,8 @@ class Profile extends Component{
 const mapStateToProps = (state, ownProps ) => {
   return {
     isLoggedIn: state.userReducer.isLoggedIn,
-    firstName: state.userReducer.firstName,
-    lastName: state.userReducer.lastName,
+    firstName: state.profileReducer.firstName,
+    lastName: state.profileReducer.lastName,
     userName: state.userReducer.userName,
   };
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ScrollView, View, StyleSheet, Text, TextInput,TouchableOpacity } from 'react-native';
-import { login } from '../actions';
+import { login } from '../actions/UserActions';
 
 class Login extends Component{
   constructor(props){
@@ -67,15 +67,17 @@ class Login extends Component{
     }
   }  
 
-  loginCallbackFunction(){
-    this.setState({
+  loginCallbackFunction(error){
+    /*this.setState({
       isIncorrectCredentials:true
     })
+    console.log("debug");*/
+    console.log(error);
   }
 
   onPressLoginButton(){
     //console.log(this.state.userName);
-    this.props.login(this.state.userName, this.state.password,this.loginCallbackFunction());
+    this.props.login({userName:this.state.userName, password:this.state.password},this.loginCallbackFunction);
   }
 }
 
@@ -87,7 +89,7 @@ const mapStateToProps = (state, ownProps ) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    login:(userName,password,callbackFunction)=>{ dispatch(login({userName:userName, password:password},callbackFunction));}
+    login:(loginData,callbackFunction)=> { dispatch(login(loginData,callbackFunction));}
   };
 }
 

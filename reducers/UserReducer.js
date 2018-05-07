@@ -1,13 +1,10 @@
 import * as actionType from '../actions/ActionTypes';
 import storage from 'redux-persist/lib/storage';
-import { persistReducer } from 'redux-persist';
 
 const initialState = {
   isLoggedIn: false,
   userName:'',
   password:'',
-  firstName: '',
-  lastName: '',
 };
 
 export default function userReducer(state = initialState, action){
@@ -16,7 +13,6 @@ export default function userReducer(state = initialState, action){
       return Object.assign({},state,{
         isLoggedIn: true,
         userName:action.userName,
-        password:action.password,
       });
     case actionType.LOGIN_FAILURE:
       return Object.assign({},state,{
@@ -30,11 +26,6 @@ export default function userReducer(state = initialState, action){
         userName:'',
         password:''
       });
-    case actionType.EDIT_PROFILE:
-      return Object.assign({},state,{
-        firstName: action.firstName,
-        lastName: action.lastName,
-      });   
     default:
       return state; 
   }

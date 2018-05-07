@@ -3,7 +3,7 @@ import { View, Text, StyleSheet,ScrollView,TouchableOpacity, TextInput } from 'r
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
-import { editProfile } from '../actions';
+import { editProfile } from '../actions/ProfileActions';
 
 class EditProfile extends Component{
 
@@ -65,8 +65,8 @@ class EditProfile extends Component{
 
 const mapStateToProps = (state, ownProps ) => {
   return {
-    firstName: state.userReducer.firstName,
-    lastName: state.userReducer.lastName,
+    firstName: state.profileReducer.firstName,
+    lastName: state.profileReducer.lastName,
   };
 }
 
