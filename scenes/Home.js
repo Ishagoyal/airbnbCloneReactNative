@@ -5,9 +5,8 @@ import propertyListData from '../utils/Data.json';
 import { connect } from 'react-redux';
 import Login from '../components/Login';
 
-//var count=0;
-//var isPropertyExists = false;
-//var objectLength = Object.keys(propertyListData).length;
+var placeCount=0;
+var totalPlaces = Object.keys(propertyListData).length;
 
 class Home extends Component{
 
@@ -19,8 +18,6 @@ class Home extends Component{
       searchCityName:'',
       isPropertyExists:false
     }
-
-    //this.ifPropertyExists = this.ifPropertyExists.bind(this);
   }
 
   render(){
@@ -68,12 +65,6 @@ class Home extends Component{
     Actions.property({propertyId: 1});  
   }
 
-  /*ifPropertyExists(){
-    this.setState({
-      isPropertyExists : true
-    });
-  }  */
- 
   renderPropertyListRow(item){
     return(
       <View style={styles.container}>
@@ -84,13 +75,12 @@ class Home extends Component{
       </View> 
     );   
   }
- 
+  
+  
   renderPropertyOnCityBasis(item){
-    /*this.setState((prevState) => ({
-      itemCount: prevState.itemCount + 1,
-    }));*/
+    placeCount++;
+    //console.log(placeCount);
     if(item.city == this.state.propertyCityName){
-      //{this.ifPropertyExists()}
       return(
         <View style={styles.container}>
           <Image source = {{uri:item.images.image1}} style={{width:400,height: 200,padding:5}} />
@@ -100,11 +90,11 @@ class Home extends Component{
         </View> 
       );
     }
-    else{
-    //else if ((itemCount == objectLength) && (isPropertyExists == false)){
+
+    if(item.city != this.state.propertyCityName && placeCount == totalPlaces){
       return(
         <View style={styles.container}>
-          <Text style={styles.error}>{'No place found in this City!'}</Text>
+          <Text style={styles.noPlaceFound}>{'No place found in this City!'}</Text>
         </View>
       );
     }  
@@ -138,6 +128,7 @@ class Home extends Component{
       isSearchingCity:false,
       searchCityName:'',
     });
+    placeCount = 0;
   }
 
   onPressSearchButton(cityName){
@@ -226,7 +217,9 @@ const styles = StyleSheet.create({
     fontWeight:'bold',
     fontSize:18,
   },
-  error:{
-
+  noPlaceFound:{
+    fontSize: 18,
+    fontWeight:'bold',
+    margin:10,
   }
 })
