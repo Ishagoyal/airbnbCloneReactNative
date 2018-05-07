@@ -10,7 +10,7 @@ import {
   TouchableOpacity,
   TouchableHighlight 
 } from 'react-native'; 
-import propertyDetailsData from '../utils/propertyDetailsData.json';
+import propertyDetailsData from '../utils/PropertyDetailsData.json';
 import { Actions } from 'react-native-router-flux';
 import Swiper from 'react-native-swiper';
 

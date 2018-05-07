@@ -1,42 +1,40 @@
-import * as actionType from './actionTypes';
-import loginData from '../utils/userData.json';
+import * as actionType from './ActionTypes';
+import loginData from '../utils/UserData.json';
 
 
-function login(username, password):Action{
-	if((loginData[0].username == username) && (loginData[0].password == password)){
-  	return {
-			type: actionType.LOGIN_SUCCESS,
-			username: username,
-  		password: password,
-		}
-	} 
-	else{
-		return{
-			type:actionType.LOGIN_FAILURE,
-			username: '',
-  		password: '',
-		}
-	}  
+function login(userData, errorCallback):Action{
+  //console.log(userData);
+  //console.log(userData.userName);
+  if((loginData[0].userName == userData.userName) && (loginData[0].password == userData.password)){
+    return{
+        type: actionType.LOGIN_SUCCESS,
+        userName: userData.userName,
+        password: userData.password,
+      }
+    }
+  else{
+    return{
+      type:  actionType.LOGIN_FAILURE,
+      errorCallback,
+    }
+  } 
 }
 
 function logout():Action{
-	return{
-		type: actionType.LOGOUT,
-	}
-}	
+  return{
+    type: actionType.LOGOUT,
+  }
+} 
 
-function editProfile(firstName,lastName):Action{
-	return {
-		type:actionType.EDIT_PROFILE,
-		firstName: firstName,
-		lastName: lastName,
-	}
+function editProfile(userData):Action{
+  //console.log(userData);
+  //console.log(userData.firstName);
+  return {
+    type:actionType.EDIT_PROFILE,
+    firstName: userData.firstName,
+    lastName: userData.lastName,
+  }
 }
 
 
 module.exports = {login,logout, editProfile};
-
-
-/*export const signup = (userName, password) => ({
-	type: actionType.SIGNUP,
-});*/

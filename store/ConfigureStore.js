@@ -9,8 +9,10 @@ const persistConfiq = {
   storage : storage,
 }
 
-const persistedReducer = persistReducer (persistConfiq, reducers);
+const persistedReducer = persistReducer(persistConfiq, reducers);
 
-export const store = createStore(persistedReducer);
+export const store = createStore(
+  persistedReducer,
+);
 export const persistor = persistStore(store);
 
