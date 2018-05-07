@@ -68,16 +68,20 @@ class Login extends Component{
   }  
 
   loginCallbackFunction(error){
-    /*this.setState({
-      isIncorrectCredentials:true
-    })
-    console.log("debug");*/
-    console.log(error);
+    //console.log(this);
+    if(error == null){
+
+    }
+    else{
+      this.setState({
+        isIncorrectCredentials:true
+      })
+    } 
   }
 
   onPressLoginButton(){
     //console.log(this.state.userName);
-    this.props.login({userName:this.state.userName, password:this.state.password},this.loginCallbackFunction);
+    this.props.login({userName:this.state.userName, password:this.state.password},this.loginCallbackFunction.bind(this));
   }
 }
 
