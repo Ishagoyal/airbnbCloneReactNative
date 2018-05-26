@@ -10,7 +10,7 @@ function login(userData, errorCallback):Action{
       dispatch(loginSucess(userData)); 
   }
   else{
-    return dispatch =>xd2rr
+    return dispatch =>
     errorCallback("Invalid Credentials");
   } 
 }

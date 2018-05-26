@@ -23,6 +23,7 @@ import Settings from '../scenes/Settings';
 import GetHelp from '../scenes/GetHelp';
 import GiveFeedback from '../scenes/GiveFeedback';
 import GuestNumber from '../scenes/GuestNumber';
+import PhoneDetails from '../scenes/PhoneDetails';
 
 export default class Scenes extends Component{
   render() {
@@ -42,6 +43,7 @@ export default class Scenes extends Component{
               <Scene key="settings" component={Settings} title="Settings"/>
               <Scene key="getHelp" component={GetHelp} title="GetHelp"/>
               <Scene key="giveFeedback" component={GiveFeedback} title="GiveFeedback"/>
+              <Scene key="phoneDetails" component={PhoneDetails} title="PhoneDetails" />
               <Scene  
                 key="tabbar"
                 tabs
@@ -57,7 +59,7 @@ export default class Scenes extends Component{
                   title="Explore" 
                   icon={TabIcon}
                   activeBackgroundColor="#DDD"
-                  navigationBarStyle={{ backgroundColor: 'green' }}
+                  navigationBarStyle={{ backgroundColor: 'grey' }}
                   titleStyle={{ color: 'white', alignSelf: 'center' }}
                   component={Home}
                 >
@@ -67,7 +69,7 @@ export default class Scenes extends Component{
                   title="Trips" 
                   icon={TabIcon}
                   activeBackgroundColor="#DDD"
-                  navigationBarStyle={{ backgroundColor: 'green' }}
+                  navigationBarStyle={{ backgroundColor: 'grey' }}
                   titleStyle={{ color: 'white', alignSelf: 'center' }}
                   component={Trips}
                 >
@@ -77,7 +79,7 @@ export default class Scenes extends Component{
                   title="Saved" 
                   icon={TabIcon}
                   activeBackgroundColor="#DDD"
-                  navigationBarStyle={{ backgroundColor: 'green' }}
+                  navigationBarStyle={{ backgroundColor: 'grey' }}
                   titleStyle={{ color: 'white', alignSelf: 'center' }}
                   component={Saved}
                 >
@@ -87,7 +89,7 @@ export default class Scenes extends Component{
                   title="Inbox" 
                   icon={TabIcon}
                   activeBackgroundColor="#DDD"
-                  navigationBarStyle={{ backgroundColor: 'green' }}
+                  navigationBarStyle={{ backgroundColor: 'grey' }}
                   titleStyle={{ color: 'white', alignSelf: 'center' }}
                   component={Inbox}
                 >
@@ -97,7 +99,7 @@ export default class Scenes extends Component{
                   title="Profile" 
                   icon={TabIcon}
                   activeBackgroundColor="#DDD"
-                  navigationBarStyle={{ backgroundColor: 'green' }}
+                  navigationBarStyle={{ backgroundColor: 'grey' }}
                   titleStyle={{ color: 'white', alignSelf: 'center' }}
                   component={Profile}
                 >

@@ -72,9 +72,10 @@ export default class BookProperty extends Component{
   } 
 
   onPressNextButton(){
-
+    Actions.phoneDetails()
   }
 }
+
 const styles = StyleSheet.create({
   container: {
     flex:1,

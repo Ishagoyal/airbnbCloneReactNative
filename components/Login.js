@@ -72,7 +72,7 @@ class Login extends Component{
     if(error == null){
 
     }
-    else{
+    else if(error == "Invalid Credentials"){
       this.setState({
         isIncorrectCredentials:true
       })
